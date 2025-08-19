@@ -1,0 +1,47 @@
+
+# ====================================================================
+# Python Dependencies
+# ====================================================================
+
+# --- Web Framework ---
+fastapi
+uvicorn[standard] # Includes uvloop for high performance
+python-multipart
+
+# --- Core & Async ---
+httpx # Async HTTP client
+websockets # For WebSocket communication
+orjson # High-performance JSON library
+
+# --- Bybit & Crypto ---
+# pybit # We are using a custom client, but it can be a reference
+
+# --- Config & Security ---
+pydantic
+pydantic-settings # For loading from .env
+python-jose[cryptography] # For JWT
+passlib==1.7.4
+bcrypt==3.2.0
+
+# --- Database ---
+sqlmodel # ORM (combines SQLAlchemy and Pydantic)
+aiosqlite # Async driver for SQLite
+# asyncpg # Async driver for PostgreSQL (optional, if used)
+
+# --- Logging & Metrics ---
+loguru # Modern logging library
+prometheus-client
+prometheus-fastapi-instrumentator
+
+# --- Trend Analysis ---
+vaderSentiment # For sentiment analysis
+PyYAML # For loading asset files
+
+# --- Event Queue (Optional) ---
+# aiokafka
+# redis
+
+# --- Testing ---
+pytest
+pytest-asyncio
+

@@ -1,0 +1,67 @@
+
+# ====================================================================
+# Docker Compose Configuration
+# ====================================================================
+#
+# - `docker-compose up` 명령어로 전체 애플리케이션 스택을 쉽게 실행하기 위한
+#   설정 파일입니다.
+# - 이 파일은 `api` 서비스(우리의 FastAPI 앱)를 정의하고, 선택적으로 데이터베이스(Postgres)
+#   나 메시지 큐(Redis) 같은 다른 서비스들을 함께 실행할 수 있도록 구성되어 있습니다.
+
+version: '3.8'
+
+services:
+  # --- FastAPI Application Service ---
+  api:
+    # 현재 디렉토리의 Dockerfile을 사용하여 이미지를 빌드합니다.
+    build: .
+    # 컨테이너 이름을 지정합니다.
+    container_name: crypto_bot_api
+    # .env 파일을 컨테이너 내부로 전달하여 환경 변수로 사용합니다.
+    env_file:
+      - .env
+    # 로컬 포트 8000을 컨테이너의 8000번 포트와 매핑합니다.
+    # 이를 통해 호스트 머신에서 http://localhost:8000 으로 API에 접근할 수 있습니다.
+    ports:
+      - "8000:8000"
+    # 로컬의 logs 디렉토리를 컨테이너의 /home/appuser/app/logs와 마운트합니다.
+    # 이를 통해 컨테이너가 종료되어도 로그 파일이 호스트 머신에 유지됩니다.
+    volumes:
+      - ./logs:/home/appuser/app/logs
+      - ./trading_bot.db:/home/appuser/app/trading_bot.db # SQLite DB 파일 영속성
+    # 컨테이너가 비정상 종료되었을 때 자동으로 재시작합니다.
+    restart: unless-stopped
+    # 다른 서비스(db, redis)가 시작된 후에 api 서비스를 시작하도록 의존성을 설정합니다.
+    depends_on:
+      - db    # PostgreSQL을 사용할 경우 주석 해제
+      # - redis # Redis를 사용할 경우 주석 해제
+
+  # --- PostgreSQL Database Service (Optional) ---
+  db:
+    # 공식 PostgreSQL 이미지를 사용합니다.
+    image: postgres:15-alpine
+    container_name: crypto_bot_db
+    # 데이터베이스 환경 변수 설정. .env 파일의 DB_URL과 일치해야 합니다.
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: trading_bot_db
+    # 로컬의 postgres_data 볼륨과 컨테이너의 데이터 디렉토리를 마운트하여 DB 데이터를 영속화합니다.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # 로컬 포트 5432를 컨테이너의 5432 포트와 매핑 (DB 클라이언트로 직접 접속 시 사용)
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  # --- Redis Service (Optional) ---
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: crypto_bot_redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+
+# Docker Compose가 생성/관리할 명명된 볼륨을 정의합니다.
+volumes:
+  postgres_data:

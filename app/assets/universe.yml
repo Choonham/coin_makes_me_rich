@@ -1,0 +1,33 @@
+
+# ===================================================================================
+#   assets/universe.yml: 거래 허용 심볼 목록 (Universe)
+# ===================================================================================
+#
+#   - 자동 거래 전략이 거래를 시도할 수 있는 심볼의 화이트리스트입니다.
+#   - 이 목록에 없는 심볼에 대해서는 신호가 감지되더라도 거래가 실행되지 않습니다.
+#   - 리스크 관리의 첫 번째 단계로, 원치 않는 자산에 대한 거래를 원천적으로 차단합니다.
+#
+#   **사용처:**
+#   - **RiskEngine**: 거래 요청이 들어왔을 때, 해당 심볼이 이 목록에 있는지 가장 먼저 확인합니다.
+#   - **StrategyRouter**: 이 목록을 순회하며 각 심볼에 대한 거래 기회를 탐색합니다.
+#   - **BybitClient (WebSocket)**: 이 목록에 있는 심볼들의 실시간 데이터(오더북, 체결)를 구독합니다.
+#
+#   **관리:**
+#   - API의 `POST /config/universe` 엔드포인트를 통해 실시간으로 이 목록을 변경할 수 있습니다.
+#   - 서버 재시작 시에는 이 파일의 내용으로 초기화됩니다.
+
+- BTCUSDT
+- ETHUSDT
+- SOLUSDT
+- XRPUSDT
+- DOGEUSDT
+- ADAUSDT
+- MATICUSDT
+- AVAXUSDT
+- LINKUSDT
+- BNBUSDT
+- USDCUSDT # Added based on top trading volume
+- MNTUSDT # Added based on top trading volume
+- ETHUSDC # Added based on top trading volume
+- BTCUSDC # Added based on top trading volume
+- DOTUSDT # Added based on active trading
