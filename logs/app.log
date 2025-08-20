@@ -11993,3 +11993,943 @@
 2025-08-20 14:15:08.523 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021074946465568256', 'orderLinkId': '2021074946465568257'}
 2025-08-20 14:15:08.527 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021074946465568256', 'orderLinkId': '2021074946465568257', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '914.89000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '914.89000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755666908497', 'updatedTime': '1755666908501', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
 2025-08-20 14:15:11.623 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021074946465568256
+2025-08-20 14:15:12.440 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9148.93, PnL Day: -111.02, Coins: 6
+2025-08-20 14:15:15.024 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:15:17.696 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.04, PnL Day: -110.92, Coins: 6
+2025-08-20 14:15:22.931 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:15:22.932 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:15:22.932 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:15:22.932 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:15:22.949 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.17, PnL Day: -110.78, Coins: 6
+2025-08-20 14:15:28.077 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.24, PnL Day: -110.71, Coins: 6
+2025-08-20 14:15:33.208 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.27, PnL Day: -110.68, Coins: 6
+2025-08-20 14:15:37.969 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:15:37.969 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:15:37.969 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:15:37.969 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:15:37.970 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for BTCUSDT, no orderbook data to get current price.
+2025-08-20 14:15:38.315 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.88, PnL Day: -110.07, Coins: 6
+2025-08-20 14:15:43.417 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.79, PnL Day: -110.17, Coins: 6
+2025-08-20 14:15:48.690 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.58, PnL Day: -110.37, Coins: 6
+2025-08-20 14:15:51.167 | INFO     | app.ws.manager:connect:64 - New WebSocket connection: Address(host='118.235.7.196', port=59464). Total clients: 1
+2025-08-20 14:15:53.790 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.55, PnL Day: -110.40, Coins: 6
+2025-08-20 14:15:55.584 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:15:55.585 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:15:58.900 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.56, PnL Day: -110.39, Coins: 6
+2025-08-20 14:16:04.057 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.36, PnL Day: -110.59, Coins: 6
+2025-08-20 14:16:09.168 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.58, PnL Day: -110.37, Coins: 6
+2025-08-20 14:16:13.088 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:16:13.088 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:16:13.088 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:16:13.088 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:16:13.089 | DEBUG    | app.strategy.router:_evaluate_signal:186 - Sell signal for SOLUSDT ignored. Asset value ($0.1649) is below minimum.
+2025-08-20 14:16:14.274 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.47, PnL Day: -110.48, Coins: 6
+2025-08-20 14:16:19.402 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.49, PnL Day: -110.47, Coins: 6
+2025-08-20 14:16:24.698 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.56, PnL Day: -110.40, Coins: 6
+2025-08-20 14:16:29.810 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.66, PnL Day: -110.29, Coins: 6
+2025-08-20 14:16:32.747 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:16:32.747 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:16:32.747 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:16:32.747 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:16:32.749 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for ETHUSDT, no orderbook data to get current price.
+2025-08-20 14:16:34.947 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9150.02, PnL Day: -109.93, Coins: 6
+2025-08-20 14:16:40.060 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.72, PnL Day: -110.23, Coins: 6
+2025-08-20 14:16:45.170 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9149.50, PnL Day: -110.45, Coins: 6
+2025-08-20 14:16:50.327 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9148.61, PnL Day: -111.35, Coins: 6
+2025-08-20 14:16:52.505 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC looks bearish, might dump soon.
+2025-08-20 14:16:52.506 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.79, Conf=0.79, Text='$BTC looks bearish, might dump soon....'
+2025-08-20 14:16:52.506 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:16:52.506 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:16:52.508 | INFO     | app.strategy.router:_evaluate_signal:190 - [EVALUATION] SELL signal for BTCUSDT. Proceeding to sell.
+2025-08-20 14:16:52.508 | CRITICAL | app.strategy.router:_execute_sell_trade:264 - LOCKING TRADES: Submitting SELL order for BTCUSDT.
+2025-08-20 14:16:52.593 | DEBUG    | app.exchange.bybit_client:place_market_order:245 - [BTCUSDT] Adjusting qty. Original: 0.00779995, Step: 0, MinQty: 0.000001
+2025-08-20 14:16:52.593 | INFO     | app.exchange.bybit_client:place_market_order:268 - Original sell qty: 0.00779995, Adjusted sell qty: 0.007799 for symbol BTCUSDT
+2025-08-20 14:16:52.593 | INFO     | app.exchange.bybit_client:place_market_order:275 - Submitting SPOT market order by QTY: {'category': 'spot', 'symbol': 'BTCUSDT', 'side': 'Sell', 'orderType': 'Market', 'qty': '0.007799'}
+2025-08-20 14:16:52.680 | SUCCESS  | app.strategy.router:_execute_sell_trade:270 - SPOT SELL order submitted for BTCUSDT: {'orderId': '2021075820189423104', 'orderLinkId': '2021075820189423105'}
+2025-08-20 14:16:52.690 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'BTCUSDT', 'orderId': '2021075820189423104', 'orderLinkId': '2021075820189423105', 'blockTradeId': '', 'side': 'Sell', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '0.007799', 'avgPrice': '117240.8', 'leavesQty': '0', 'leavesValue': '0.00000000', 'cumExecQty': '0.007799', 'cumExecValue': '914.36104466', 'cumExecFee': '0.731488835728', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '118669.99', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'baseCoin', 'createdTime': '1755667012653', 'updatedTime': '1755667012659', 'feeCurrency': 'USDT', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:16:54.275 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021075820189423104
+2025-08-20 14:16:55.420 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9177.00, PnL Day: -82.95, Coins: 6
+2025-08-20 14:16:57.684 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for BTCUSDT is considered complete.
+2025-08-20 14:17:00.526 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.63, PnL Day: -83.32, Coins: 6
+2025-08-20 14:17:04.388 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:17:04.388 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:17:04.389 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:17:04.389 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:17:04.391 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.16).
+2025-08-20 14:17:04.394 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:17:04.395 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:17:04.396 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '917.66', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:17:04.477 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021075919149831680', 'orderLinkId': '2021075919158220288'}
+2025-08-20 14:17:04.480 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021075919149831680', 'orderLinkId': '2021075919158220288', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '917.66000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '917.66000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667024450', 'updatedTime': '1755667024454', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:17:05.619 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.22, PnL Day: -83.74, Coins: 6
+2025-08-20 14:17:07.582 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021075919149831680
+2025-08-20 14:17:10.714 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.35, PnL Day: -83.60, Coins: 6
+2025-08-20 14:17:10.987 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:17:15.843 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.44, PnL Day: -83.52, Coins: 6
+2025-08-20 14:17:20.970 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.90, PnL Day: -83.05, Coins: 6
+2025-08-20 14:17:21.195 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:17:21.195 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:17:21.196 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:17:21.196 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:17:21.196 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for ETHUSDT. Asset already held with sufficient value ($913.48).
+2025-08-20 14:17:26.086 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.95, PnL Day: -83.01, Coins: 6
+2025-08-20 14:17:31.207 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.99, PnL Day: -82.96, Coins: 6
+2025-08-20 14:17:34.085 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:17:34.085 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:17:36.344 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9177.04, PnL Day: -82.92, Coins: 6
+2025-08-20 14:17:41.483 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.85, PnL Day: -83.10, Coins: 6
+2025-08-20 14:17:46.757 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.70, PnL Day: -83.25, Coins: 6
+2025-08-20 14:17:51.846 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.65, PnL Day: -83.31, Coins: 6
+2025-08-20 14:17:53.924 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:17:53.924 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:17:53.924 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:17:53.925 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:17:56.975 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.93, PnL Day: -83.02, Coins: 6
+2025-08-20 14:18:02.085 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.70, PnL Day: -83.25, Coins: 6
+2025-08-20 14:18:07.120 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:18:07.121 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:18:07.190 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.78, PnL Day: -83.17, Coins: 6
+2025-08-20 14:18:12.303 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.18, PnL Day: -83.77, Coins: 6
+2025-08-20 14:18:17.446 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.12, PnL Day: -83.83, Coins: 6
+2025-08-20 14:18:21.000 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH just announced a new partnership, looks very promising.
+2025-08-20 14:18:21.000 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.78, Conf=0.78, Text='$ETH just announced a new partnership, looks very ...'
+2025-08-20 14:18:21.000 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:18:21.000 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:18:21.002 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for ETHUSDT, no orderbook data to get current price.
+2025-08-20 14:18:22.553 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.15, PnL Day: -83.80, Coins: 6
+2025-08-20 14:18:27.810 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.17, PnL Day: -83.78, Coins: 6
+2025-08-20 14:18:32.919 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.13, PnL Day: -83.83, Coins: 6
+2025-08-20 14:18:35.218 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH just announced a new partnership, looks very promising.
+2025-08-20 14:18:35.218 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.78, Conf=0.78, Text='$ETH just announced a new partnership, looks very ...'
+2025-08-20 14:18:35.218 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:18:35.218 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:18:35.219 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for ETHUSDT. Asset already held with sufficient value ($913.48).
+2025-08-20 14:18:38.023 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.21, PnL Day: -83.75, Coins: 6
+2025-08-20 14:18:43.125 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.30, PnL Day: -83.66, Coins: 6
+2025-08-20 14:18:48.233 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.30, PnL Day: -83.66, Coins: 6
+2025-08-20 14:18:51.996 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:18:51.997 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:18:53.319 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.12, PnL Day: -83.83, Coins: 6
+2025-08-20 14:18:58.428 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9175.78, PnL Day: -84.17, Coins: 6
+2025-08-20 14:19:03.546 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9176.16, PnL Day: -83.79, Coins: 6
+2025-08-20 14:19:04.692 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:19:04.693 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:19:04.693 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:19:04.693 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:19:04.694 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for BTCUSDT, no orderbook data to get current price.
+2025-08-20 14:19:08.799 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9175.93, PnL Day: -84.02, Coins: 6
+2025-08-20 14:19:13.916 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9175.93, PnL Day: -84.02, Coins: 6
+2025-08-20 14:19:19.065 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9175.97, PnL Day: -83.98, Coins: 6
+2025-08-20 14:19:20.475 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:19:20.475 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:19:24.167 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9175.86, PnL Day: -84.09, Coins: 6
+2025-08-20 14:19:26.997 | INFO     | app.ws.manager:disconnect:72 - WebSocket connection closed: Address(host='118.235.7.196', port=59464). Total clients: 0
+2025-08-20 14:19:27.012 | INFO     | app.ws.manager:connect:64 - New WebSocket connection: Address(host='118.235.7.196', port=57514). Total clients: 1
+2025-08-20 14:19:29.273 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9175.77, PnL Day: -84.18, Coins: 6
+2025-08-20 14:19:30.623 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:19:30.623 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:19:30.623 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:19:30.623 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:19:30.624 | INFO     | app.strategy.router:_evaluate_signal:190 - [EVALUATION] SELL signal for ETHUSDT. Proceeding to sell.
+2025-08-20 14:19:30.624 | CRITICAL | app.strategy.router:_execute_sell_trade:264 - LOCKING TRADES: Submitting SELL order for ETHUSDT.
+2025-08-20 14:19:30.624 | DEBUG    | app.exchange.bybit_client:place_market_order:245 - [ETHUSDT] Adjusting qty. Original: 0.22280117, Step: 0, MinQty: 0.00001
+2025-08-20 14:19:30.625 | INFO     | app.exchange.bybit_client:place_market_order:268 - Original sell qty: 0.22280117, Adjusted sell qty: 0.22280 for symbol ETHUSDT
+2025-08-20 14:19:30.625 | INFO     | app.exchange.bybit_client:place_market_order:275 - Submitting SPOT market order by QTY: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Sell', 'orderType': 'Market', 'qty': '0.22280'}
+2025-08-20 14:19:30.709 | SUCCESS  | app.strategy.router:_execute_sell_trade:270 - SPOT SELL order submitted for ETHUSDT: {'orderId': '2021077145832756736', 'orderLinkId': '2021077145832756737'}
+2025-08-20 14:19:30.715 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021077145832756736', 'orderLinkId': '2021077145832756737', 'blockTradeId': '', 'side': 'Sell', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '0.22280', 'avgPrice': '3722.61', 'leavesQty': '0', 'leavesValue': '0.0000000', 'cumExecQty': '0.2228', 'cumExecValue': '829.3976849', 'cumExecFee': '0.66351814792', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '4099.99', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'baseCoin', 'createdTime': '1755667170681', 'updatedTime': '1755667170686', 'feeCurrency': 'USDT', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:19:32.303 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021077145832756736
+2025-08-20 14:19:34.361 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.58, PnL Day: -181.37, Coins: 6
+2025-08-20 14:19:35.718 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:19:39.511 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.83, PnL Day: -181.12, Coins: 6
+2025-08-20 14:19:43.463 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:19:43.463 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:19:43.464 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:19:43.464 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:19:44.625 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.58, PnL Day: -181.37, Coins: 6
+2025-08-20 14:19:49.896 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.63, PnL Day: -181.32, Coins: 6
+2025-08-20 14:19:54.994 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9079.40, PnL Day: -180.56, Coins: 6
+2025-08-20 14:20:00.143 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.37, PnL Day: -181.59, Coins: 6
+2025-08-20 14:20:02.235 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:20:02.235 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:20:02.235 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:20:02.235 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:20:02.236 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.16).
+2025-08-20 14:20:02.237 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:20:02.238 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:20:02.238 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '907.84', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:20:02.319 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021077411030210048', 'orderLinkId': '2021077411030210049'}
+2025-08-20 14:20:02.336 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021077411030210048', 'orderLinkId': '2021077411030210049', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '907.84000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '907.84000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667202295', 'updatedTime': '1755667202300', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:20:05.240 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.24, PnL Day: -181.71, Coins: 6
+2025-08-20 14:20:05.415 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021077411030210048
+2025-08-20 14:20:08.822 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:20:10.334 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.30, PnL Day: -181.66, Coins: 6
+2025-08-20 14:20:15.192 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:20:15.192 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:20:15.193 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:20:15.193 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:20:15.472 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.37, PnL Day: -181.58, Coins: 6
+2025-08-20 14:20:20.595 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.09, PnL Day: -181.86, Coins: 6
+2025-08-20 14:20:25.706 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.09, PnL Day: -181.87, Coins: 6
+2025-08-20 14:20:27.083 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:20:27.083 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:20:30.816 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.10, PnL Day: -181.85, Coins: 6
+2025-08-20 14:20:35.967 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.61, PnL Day: -181.35, Coins: 6
+2025-08-20 14:20:41.105 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.68, PnL Day: -181.27, Coins: 6
+2025-08-20 14:20:43.564 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:20:43.564 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:20:43.564 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:20:43.565 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:20:46.214 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.68, PnL Day: -181.27, Coins: 6
+2025-08-20 14:20:51.320 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.27, PnL Day: -181.68, Coins: 6
+2025-08-20 14:20:56.411 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.13, PnL Day: -181.82, Coins: 6
+2025-08-20 14:20:57.916 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:20:57.917 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:20:57.917 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:20:57.917 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:20:57.918 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for ETHUSDT, no orderbook data to get current price.
+2025-08-20 14:21:01.521 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.46, PnL Day: -181.50, Coins: 6
+2025-08-20 14:21:06.677 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.79, PnL Day: -181.16, Coins: 6
+2025-08-20 14:21:11.785 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9078.57, PnL Day: -181.38, Coins: 6
+2025-08-20 14:21:16.408 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH just announced a new partnership, looks very promising.
+2025-08-20 14:21:16.408 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.78, Conf=0.78, Text='$ETH just announced a new partnership, looks very ...'
+2025-08-20 14:21:16.408 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:21:16.408 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:21:16.410 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset ETHUSDT (value: $0.00).
+2025-08-20 14:21:16.412 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for ETHUSDT approved by RiskEngine.
+2025-08-20 14:21:16.414 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for ETHUSDT.
+2025-08-20 14:21:16.415 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '907.86', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:21:16.501 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for ETHUSDT: {'orderId': '2021078033305540096', 'orderLinkId': '2021078033305540097'}
+2025-08-20 14:21:16.509 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021078033305540096', 'orderLinkId': '2021078033305540097', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '907.8600000', 'avgPrice': '3964.48', 'leavesQty': '0', 'leavesValue': '0.0320187', 'cumExecQty': '0.22899', 'cumExecValue': '907.8279813', 'cumExecFee': '0.000183192', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '3700.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667276477', 'updatedTime': '1755667276482', 'feeCurrency': 'ETH', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:21:16.893 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9121.37, PnL Day: -138.58, Coins: 6
+2025-08-20 14:21:19.741 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021078033305540096
+2025-08-20 14:21:21.985 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9121.67, PnL Day: -138.28, Coins: 6
+2025-08-20 14:21:23.009 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:21:27.132 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9121.84, PnL Day: -138.11, Coins: 6
+2025-08-20 14:21:32.242 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9121.85, PnL Day: -138.11, Coins: 6
+2025-08-20 14:21:34.889 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:21:34.889 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:21:34.889 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:21:34.889 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:21:34.890 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset BTCUSDT (value: $0.11).
+2025-08-20 14:21:34.891 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for BTCUSDT approved by RiskEngine.
+2025-08-20 14:21:34.892 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for BTCUSDT.
+2025-08-20 14:21:34.892 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'BTCUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '912.18', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:21:34.976 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for BTCUSDT: {'orderId': '2021078188268295680', 'orderLinkId': '2021078188268295681'}
+2025-08-20 14:21:34.981 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'BTCUSDT', 'orderId': '2021078188268295680', 'orderLinkId': '2021078188268295681', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '912.18000000', 'avgPrice': '117818.86', 'leavesQty': '0', 'leavesValue': '0.02631976', 'cumExecQty': '0.007742', 'cumExecValue': '912.15368024', 'cumExecFee': '0.0000061936', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '117810.30', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667294950', 'updatedTime': '1755667294955', 'feeCurrency': 'BTC', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:21:37.339 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9087.78, PnL Day: -172.17, Coins: 6
+2025-08-20 14:21:38.082 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021078188268295680
+2025-08-20 14:21:41.494 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for BTCUSDT is considered complete.
+2025-08-20 14:21:42.424 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9087.78, PnL Day: -172.17, Coins: 6
+2025-08-20 14:21:46.723 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:21:46.723 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:21:46.723 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:21:46.723 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:21:47.553 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9088.06, PnL Day: -171.90, Coins: 6
+2025-08-20 14:21:52.655 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9088.52, PnL Day: -171.43, Coins: 6
+2025-08-20 14:21:57.836 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9088.21, PnL Day: -171.75, Coins: 6
+2025-08-20 14:22:02.549 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:22:02.549 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:22:02.549 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:22:02.549 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:22:02.954 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9088.40, PnL Day: -171.55, Coins: 6
+2025-08-20 14:22:08.070 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9088.38, PnL Day: -171.57, Coins: 6
+2025-08-20 14:22:13.183 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9088.48, PnL Day: -171.47, Coins: 6
+2025-08-20 14:22:17.105 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:22:17.105 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:22:17.105 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:22:17.105 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:22:17.106 | INFO     | app.strategy.router:_evaluate_signal:190 - [EVALUATION] SELL signal for ETHUSDT. Proceeding to sell.
+2025-08-20 14:22:17.106 | CRITICAL | app.strategy.router:_execute_sell_trade:264 - LOCKING TRADES: Submitting SELL order for ETHUSDT.
+2025-08-20 14:22:17.106 | DEBUG    | app.exchange.bybit_client:place_market_order:245 - [ETHUSDT] Adjusting qty. Original: 0.22880798, Step: 0, MinQty: 0.00001
+2025-08-20 14:22:17.106 | INFO     | app.exchange.bybit_client:place_market_order:268 - Original sell qty: 0.22880798, Adjusted sell qty: 0.22880 for symbol ETHUSDT
+2025-08-20 14:22:17.106 | INFO     | app.exchange.bybit_client:place_market_order:275 - Submitting SPOT market order by QTY: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Sell', 'orderType': 'Market', 'qty': '0.22880'}
+2025-08-20 14:22:17.193 | SUCCESS  | app.strategy.router:_execute_sell_trade:270 - SPOT SELL order submitted for ETHUSDT: {'orderId': '2021078542401771008', 'orderLinkId': '2021078542410159616'}
+2025-08-20 14:22:17.199 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021078542401771008', 'orderLinkId': '2021078542410159616', 'blockTradeId': '', 'side': 'Sell', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '0.22880', 'avgPrice': '3752.49', 'leavesQty': '0', 'leavesValue': '0.0000000', 'cumExecQty': '0.2288', 'cumExecValue': '858.5704965', 'cumExecFee': '0.6868563972', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '4098.52', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'baseCoin', 'createdTime': '1755667337166', 'updatedTime': '1755667337171', 'feeCurrency': 'USDT', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:22:18.276 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.16, PnL Day: -264.80, Coins: 6
+2025-08-20 14:22:18.798 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021078542401771008
+2025-08-20 14:22:22.206 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:22:23.362 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.87, PnL Day: -265.09, Coins: 6
+2025-08-20 14:22:28.491 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.92, PnL Day: -265.03, Coins: 6
+2025-08-20 14:22:29.050 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is showing some weakness, be careful.
+2025-08-20 14:22:29.050 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.30, Conf=0.30, Text='$BTC is showing some weakness, be careful....'
+2025-08-20 14:22:33.607 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.03, PnL Day: -264.92, Coins: 6
+2025-08-20 14:22:38.716 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.12, PnL Day: -264.84, Coins: 6
+2025-08-20 14:22:41.310 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is showing some weakness, be careful.
+2025-08-20 14:22:41.311 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.30, Conf=0.30, Text='$BTC is showing some weakness, be careful....'
+2025-08-20 14:22:43.861 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.11, PnL Day: -264.84, Coins: 6
+2025-08-20 14:22:48.989 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.13, PnL Day: -264.82, Coins: 6
+2025-08-20 14:22:54.222 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.13, PnL Day: -264.82, Coins: 6
+2025-08-20 14:22:57.954 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC looks bearish, might dump soon.
+2025-08-20 14:22:57.954 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.79, Conf=0.79, Text='$BTC looks bearish, might dump soon....'
+2025-08-20 14:22:57.954 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:22:57.955 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:22:57.955 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.82. Halting trades.
+2025-08-20 14:22:59.359 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.12, PnL Day: -264.83, Coins: 6
+2025-08-20 14:23:04.494 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.13, PnL Day: -264.82, Coins: 6
+2025-08-20 14:23:09.611 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.24, PnL Day: -264.72, Coins: 6
+2025-08-20 14:23:14.757 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.02, PnL Day: -264.93, Coins: 6
+2025-08-20 14:23:15.615 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:23:15.615 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:23:15.615 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:23:15.615 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:23:15.616 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.93. Halting trades.
+2025-08-20 14:23:19.860 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.03, PnL Day: -264.92, Coins: 6
+2025-08-20 14:23:24.971 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.08, PnL Day: -264.87, Coins: 6
+2025-08-20 14:23:26.681 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:23:26.683 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:23:30.095 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.08, PnL Day: -264.87, Coins: 6
+2025-08-20 14:23:35.219 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.03, PnL Day: -264.92, Coins: 6
+2025-08-20 14:23:40.467 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.06, PnL Day: -264.90, Coins: 6
+2025-08-20 14:23:43.502 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is showing some weakness, be careful.
+2025-08-20 14:23:43.502 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.30, Conf=0.30, Text='$BTC is showing some weakness, be careful....'
+2025-08-20 14:23:45.751 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.17, PnL Day: -264.78, Coins: 6
+2025-08-20 14:23:50.858 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.31, PnL Day: -264.64, Coins: 6
+2025-08-20 14:23:55.948 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.25, PnL Day: -264.70, Coins: 6
+2025-08-20 14:23:57.522 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC looks bearish, might dump soon.
+2025-08-20 14:23:57.522 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.79, Conf=0.79, Text='$BTC looks bearish, might dump soon....'
+2025-08-20 14:23:57.522 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:23:57.522 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:23:57.523 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.70. Halting trades.
+2025-08-20 14:24:01.089 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.31, PnL Day: -264.64, Coins: 6
+2025-08-20 14:24:06.207 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.26, PnL Day: -264.70, Coins: 6
+2025-08-20 14:24:11.315 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.24, PnL Day: -264.72, Coins: 6
+2025-08-20 14:24:12.482 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:24:12.482 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:24:12.483 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:24:12.483 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:24:12.484 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.72. Halting trades.
+2025-08-20 14:24:16.424 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.76, PnL Day: -265.19, Coins: 6
+2025-08-20 14:24:21.549 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.18, PnL Day: -264.78, Coins: 6
+2025-08-20 14:24:26.658 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.15, PnL Day: -264.80, Coins: 6
+2025-08-20 14:24:31.785 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.11, PnL Day: -264.84, Coins: 6
+2025-08-20 14:24:31.897 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:24:31.897 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:24:31.898 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:24:31.898 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:24:31.899 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.84. Halting trades.
+2025-08-20 14:24:36.897 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.17, PnL Day: -264.79, Coins: 6
+2025-08-20 14:24:42.001 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.21, PnL Day: -264.74, Coins: 6
+2025-08-20 14:24:47.125 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.21, PnL Day: -264.75, Coins: 6
+2025-08-20 14:24:47.774 | INFO     | app.connectors.news_connector:_fetch_news:94 - Fetched 20 articles from NewsAPI.
+2025-08-20 14:24:47.775 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.67, Conf=0.67, Text='Solana (SOL) Falls Below Support, Will Bears Exten...'
+2025-08-20 14:24:47.775 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:24:47.775 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:24:47.776 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.75. Halting trades.
+2025-08-20 14:24:48.721 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:24:48.721 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:24:48.721 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:24:48.722 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:24:48.722 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.75. Halting trades.
+2025-08-20 14:24:52.263 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.20, PnL Day: -264.75, Coins: 6
+2025-08-20 14:24:57.356 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.08, PnL Day: -264.87, Coins: 6
+2025-08-20 14:25:02.611 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.12, PnL Day: -264.84, Coins: 6
+2025-08-20 14:25:04.412 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is showing some weakness, be careful.
+2025-08-20 14:25:04.412 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.30, Conf=0.30, Text='$BTC is showing some weakness, be careful....'
+2025-08-20 14:25:07.722 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.05, PnL Day: -264.90, Coins: 6
+2025-08-20 14:25:12.839 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.92, PnL Day: -265.04, Coins: 6
+2025-08-20 14:25:17.390 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:25:17.391 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:25:17.391 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:25:17.391 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:25:17.392 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-265.04. Halting trades.
+2025-08-20 14:25:17.952 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.97, PnL Day: -264.99, Coins: 6
+2025-08-20 14:25:23.055 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.09, PnL Day: -264.86, Coins: 6
+2025-08-20 14:25:28.158 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.52, PnL Day: -264.44, Coins: 6
+2025-08-20 14:25:32.892 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:25:32.893 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:25:32.893 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:25:32.893 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:25:32.895 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.44. Halting trades.
+2025-08-20 14:25:33.297 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.42, PnL Day: -264.53, Coins: 6
+2025-08-20 14:25:38.417 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.87, PnL Day: -265.08, Coins: 6
+2025-08-20 14:25:43.543 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.89, PnL Day: -265.06, Coins: 6
+2025-08-20 14:25:47.426 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:25:47.426 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:25:47.426 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:25:47.426 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:25:47.427 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-265.06. Halting trades.
+2025-08-20 14:25:48.667 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.02, PnL Day: -264.93, Coins: 6
+2025-08-20 14:25:53.773 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.91, PnL Day: -265.04, Coins: 6
+2025-08-20 14:25:57.643 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:25:57.644 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:25:57.644 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:25:57.644 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:25:57.645 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-265.04. Halting trades.
+2025-08-20 14:25:58.885 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.54, PnL Day: -264.41, Coins: 6
+2025-08-20 14:26:04.005 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.52, PnL Day: -264.43, Coins: 6
+2025-08-20 14:26:09.118 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.52, PnL Day: -264.43, Coins: 6
+2025-08-20 14:26:13.461 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:26:13.461 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:26:13.461 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:26:13.461 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:26:13.462 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.43. Halting trades.
+2025-08-20 14:26:14.260 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.03, PnL Day: -264.92, Coins: 6
+2025-08-20 14:26:19.382 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.06, PnL Day: -264.90, Coins: 6
+2025-08-20 14:26:24.500 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.97, PnL Day: -264.98, Coins: 6
+2025-08-20 14:26:28.427 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC looks bearish, might dump soon.
+2025-08-20 14:26:28.428 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.79, Conf=0.79, Text='$BTC looks bearish, might dump soon....'
+2025-08-20 14:26:28.428 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:26:28.428 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:26:28.430 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.98. Halting trades.
+2025-08-20 14:26:29.612 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.99, PnL Day: -264.96, Coins: 6
+2025-08-20 14:26:34.756 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.65, PnL Day: -265.30, Coins: 6
+2025-08-20 14:26:39.862 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.80, PnL Day: -265.15, Coins: 6
+2025-08-20 14:26:44.957 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:26:44.958 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:26:44.958 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.69, PnL Day: -265.26, Coins: 6
+2025-08-20 14:26:50.082 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.66, PnL Day: -265.30, Coins: 6
+2025-08-20 14:26:55.172 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.59, PnL Day: -265.36, Coins: 6
+2025-08-20 14:27:00.288 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.63, PnL Day: -265.32, Coins: 6
+2025-08-20 14:27:02.557 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:27:02.557 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:27:02.558 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:27:02.558 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:27:02.559 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-265.32. Halting trades.
+2025-08-20 14:27:05.428 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.70, PnL Day: -265.25, Coins: 6
+2025-08-20 14:27:10.531 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.71, PnL Day: -265.24, Coins: 6
+2025-08-20 14:27:15.648 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.71, PnL Day: -265.24, Coins: 6
+2025-08-20 14:27:20.772 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.72, PnL Day: -265.24, Coins: 6
+2025-08-20 14:27:21.626 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC looks bearish, might dump soon.
+2025-08-20 14:27:21.626 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.79, Conf=0.79, Text='$BTC looks bearish, might dump soon....'
+2025-08-20 14:27:21.626 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:27:21.626 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:27:21.628 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-265.24. Halting trades.
+2025-08-20 14:27:25.896 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.21, PnL Day: -264.74, Coins: 6
+2025-08-20 14:27:31.022 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.18, PnL Day: -264.77, Coins: 6
+2025-08-20 14:27:36.161 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.15, PnL Day: -264.80, Coins: 6
+2025-08-20 14:27:38.999 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:27:38.999 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:27:39.000 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:27:39.000 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:27:39.000 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.80. Halting trades.
+2025-08-20 14:27:41.272 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.19, PnL Day: -264.76, Coins: 6
+2025-08-20 14:27:46.377 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.15, PnL Day: -264.80, Coins: 6
+2025-08-20 14:27:51.103 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:27:51.103 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:27:51.103 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:27:51.103 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:27:51.104 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.80. Halting trades.
+2025-08-20 14:27:51.515 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.27, PnL Day: -264.69, Coins: 6
+2025-08-20 14:27:56.604 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.15, PnL Day: -264.80, Coins: 6
+2025-08-20 14:28:01.712 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.32, PnL Day: -264.64, Coins: 6
+2025-08-20 14:28:06.823 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.31, PnL Day: -264.64, Coins: 6
+2025-08-20 14:28:10.177 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:28:10.177 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:28:10.178 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:28:10.178 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:28:10.178 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.64. Halting trades.
+2025-08-20 14:28:11.932 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.48, PnL Day: -264.47, Coins: 6
+2025-08-20 14:28:17.032 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.61, PnL Day: -264.34, Coins: 6
+2025-08-20 14:28:22.185 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.54, PnL Day: -264.41, Coins: 6
+2025-08-20 14:28:23.907 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:28:23.907 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:28:27.292 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.64, PnL Day: -264.32, Coins: 6
+2025-08-20 14:28:32.420 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.64, PnL Day: -264.32, Coins: 6
+2025-08-20 14:28:37.563 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.67, PnL Day: -264.28, Coins: 6
+2025-08-20 14:28:41.956 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:28:41.956 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:28:41.957 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:28:41.957 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:28:41.958 | CRITICAL | app.risk.engine:is_globally_ok_to_trade:108 - DAILY LOSS LIMIT REACHED! PnL: $-264.28. Halting trades.
+2025-08-20 14:28:42.724 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.67, PnL Day: -264.28, Coins: 6
+2025-08-20 14:28:47.849 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.78, PnL Day: -264.18, Coins: 6
+2025-08-20 14:28:51.125 | INFO     | app.ws.manager:disconnect:72 - WebSocket connection closed: Address(host='118.235.7.196', port=57514). Total clients: 0
+2025-08-20 14:28:53.293 | INFO     | app.log_config:configure_logging:71 - Logger configured.
+2025-08-20 14:28:53.293 | INFO     | app.log_config:configure_logging:72 - Log level set to DEBUG
+2025-08-20 14:28:53.293 | INFO     | app.log_config:configure_logging:74 - Logging to file: logs/app.log
+2025-08-20 14:28:53.296 | INFO     | app.state.repo:connect:52 - Database connected and tables created (if not exist).
+2025-08-20 14:28:53.518 | INFO     | app.exchange.bybit_client:__init__:58 - BybitClient initialized for Testnet.
+2025-08-20 14:28:53.518 | INFO     | app.connectors.news_connector:create_news_connector:44 - NEWS_API_KEY found, creating real NewsConnector.
+2025-08-20 14:28:53.708 | WARNING  | app.connectors.facebook_connector:create_facebook_connector:41 - Facebook credentials not found. Creating MockFeedConnector for Facebook.
+2025-08-20 14:28:53.708 | INFO     | app.trend.aggregator:__init__:55 - TrendAggregator initialized with 2 connectors.
+2025-08-20 14:28:53.708 | INFO     | app.risk.engine:__init__:32 - RiskEngine initialized.
+2025-08-20 14:28:53.708 | INFO     | app.risk.engine:load_instrument_info:36 - Loading instrument info from Bybit...
+2025-08-20 14:28:53.828 | INFO     | app.risk.engine:load_instrument_info:40 - Received 355 instruments from Bybit API.
+2025-08-20 14:28:53.828 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'BTCUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:53.907 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for BTCUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'BTCUSDT', 'list': [['1755666000000', '118630', '118670', '116760.41', '117820', '0.433614', '51409.059804'], ['1755662400000', '118540', '118669.99', '116760.41', '118630', '1.252459', '148382.78765546'], ['1755658800000', '118510', '118540', '118510', '118540', '0.007484', '887.07646579'], ['1755655200000', '118510', '118530', '118476', '118510', '0.342569', '40589.88469789'], ['1755651600000', '118670', '118670', '117810.31', '118510', '0.075942', '8998.06293233'], ['1755648000000', '118491.25', '118670', '117810.31', '118670', '0.810832', '96079.00975008'], ['1755644400000', '118670', '118670', '117657.24', '118491.25', '0.423587', '50177.82349649'], ['1755640800000', '118670', '118670', '118640', '118670', '0.154954', '18386.9549784'], ['1755637200000', '118670', '118670', '118650', '118670', '0.151559', '17984.77910054'], ['1755633600000', '118650', '118680', '118620', '118670', '0.229271', '27204.34750494'], ['1755630000000', '117810.31', '118680', '117221.26', '118650', '0.704098', '82761.7555026'], ['1755626400000', '119086.85', '119092.76', '116760.41', '117810.31', '0.591342', '69981.83013767'], ['1755622800000', '118945.02', '119204.73', '116760.41', '119086.85', '2.417235', '284341.47022989'], ['1755619200000', '117970', '119172.19', '115120.75', '118945.02', '1.738686', '203761.93064528'], ['1755615600000', '120890', '120890', '114035.04', '117970', '0.164901', '19260.43179835']]}, 'retExtInfo': {}, 'time': 1755667733883}
+2025-08-20 14:28:53.907 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'ETHUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:53.988 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for ETHUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'ETHUSDT', 'list': [['1755666000000', '4099.99', '4100', '3436', '3799.99', '10.28937', '41461.9900309'], ['1755662400000', '4838.61', '4974.95', '3874.67', '4099.99', '36.72998', '155068.0068498'], ['1755658800000', '4959.5', '4959.5', '4838.61', '4838.61', '0.0084', '40.765604'], ['1755655200000', '4931.23', '5130.01', '4300', '4959.5', '2.74071', '13462.9868227'], ['1755651600000', '4925.86', '4942.45', '4300', '4931.23', '2.19945', '10519.9388149'], ['1755648000000', '4887.72', '4935.32', '4887.72', '4925.86', '2.06137', '10140.2226199'], ['1755644400000', '4980.1', '4980.1', '4885.24', '4887.72', '1.00932', '4985.283133'], ['1755640800000', '4982.3', '4982.82', '4980.1', '4980.1', '0.98401', '4900.557641'], ['1755637200000', '4985.12', '4996.88', '4980.1', '4982.3', '2.00602', '9993.2028197'], ['1755633600000', '4969.88', '4994.95', '4941.29', '4985.12', '1.95799', '9742.116122'], ['1755630000000', '4972.62', '4998.46', '4896.07', '4969.88', '2.39658', '11915.9944153'], ['1755626400000', '5022.84', '5022.84', '4951.38', '4972.62', '1.824', '9117.2934168'], ['1755622800000', '4968.56', '5022.84', '4820.66', '5022.84', '1.78817', '8934.6049744'], ['1755619200000', '5028.39', '5044.55', '4962.12', '4968.56', '1.99397', '9997.6974025'], ['1755615600000', '4300.2', '5064.21', '4300', '5028.39', '23.05948', '100093.585591']]}, 'retExtInfo': {}, 'time': 1755667733962}
+2025-08-20 14:28:53.988 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'XRPUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.067 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for XRPUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'XRPUSDT', 'list': [['1755666000000', '1.499317', '1.499317', '1.499317', '1.499317', '0', '0'], ['1755662400000', '1.499317', '1.499317', '1.499317', '1.499317', '0', '0'], ['1755658800000', '1.499317', '1.499317', '1.499317', '1.499317', '0', '0'], ['1755655200000', '1.499317', '1.499317', '1.499317', '1.499317', '0', '0'], ['1755651600000', '1.499317', '1.499317', '1.499317', '1.499317', '0', '0'], ['1755648000000', '1.499317', '1.499317', '1.499317', '1.499317', '0', '0'], ['1755644400000', '1.561032', '1.561032', '1.499317', '1.499317', '21.9589', '32.9233520713'], ['1755640800000', '1.511755', '1.561032', '1.511755', '1.561032', '200.068', '307.665504492'], ['1755637200000', '1.455658', '1.513147', '1.455658', '1.511755', '352.0886', '529.9967390776'], ['1755633600000', '2.555', '2.619368', '1.444864', '1.455658', '2408.5695', '4526.2036089985'], ['1755630000000', '3.336138', '3.343548', '1.5', '2.555', '67578.6056', '151191.0481093606'], ['1755626400000', '3.3359', '3.336252', '3.335847', '3.336138', '1921.6962', '6410.9151629528'], ['1755622800000', '3.3588', '3.404344', '3.322139', '3.3359', '2132.0786', '7145.3870146089'], ['1755619200000', '3.3562', '3.3609', '3.356162', '3.3588', '2209.8466', '7417.7617031915'], ['1755615600000', '3.3673', '3.4025', '3.3293', '3.3562', '1742.1263', '5850.4635222748']]}, 'retExtInfo': {}, 'time': 1755667734042}
+2025-08-20 14:28:54.067 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'DOTUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.149 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for DOTUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'DOTUSDT', 'list': [['1755666000000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755662400000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755658800000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755655200000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755651600000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755648000000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755644400000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755640800000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755637200000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755633600000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755630000000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755626400000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755622800000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755619200000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0'], ['1755615600000', '4.0348', '4.0348', '4.0348', '4.0348', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734122}
+2025-08-20 14:28:54.149 | WARNING  | app.risk.engine:load_instrument_info:55 - [DOTUSDT] Illiquid symbol detected. Skipping.
+2025-08-20 14:28:54.149 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'DOGEUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.228 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for DOGEUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'DOGEUSDT', 'list': [['1755666000000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755662400000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755658800000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755655200000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755651600000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755648000000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755644400000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755640800000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755637200000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755633600000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755630000000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755626400000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755622800000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755619200000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0'], ['1755615600000', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0.25675111111111', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734205}
+2025-08-20 14:28:54.228 | WARNING  | app.risk.engine:load_instrument_info:55 - [DOGEUSDT] Illiquid symbol detected. Skipping.
+2025-08-20 14:28:54.228 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'LINKUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.308 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for LINKUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'LINKUSDT', 'list': [['1755666000000', '24.41', '24.41', '24.41', '24.41', '0', '0'], ['1755662400000', '23.707', '24.41', '23.707', '24.41', '0.361', '8.81201'], ['1755658800000', '23.707', '23.707', '23.707', '23.707', '0', '0'], ['1755655200000', '23.4352', '23.707', '23.3017', '23.707', '15.6713', '367.96968375'], ['1755651600000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755648000000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755644400000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755640800000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755637200000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755633600000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755630000000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755626400000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755622800000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755619200000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0'], ['1755615600000', '23.4352', '23.4352', '23.4352', '23.4352', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734283}
+2025-08-20 14:28:54.308 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'MATICUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.390 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for MATICUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'MATICUSDT', 'list': [['1755666000000', '7', '7', '7', '7', '0', '0'], ['1755662400000', '7', '7', '7', '7', '0', '0'], ['1755658800000', '7', '7', '7', '7', '0', '0'], ['1755655200000', '7', '7', '7', '7', '0', '0'], ['1755651600000', '7', '7', '7', '7', '0', '0'], ['1755648000000', '7', '7', '7', '7', '0', '0'], ['1755644400000', '7', '7', '7', '7', '0', '0'], ['1755640800000', '7', '7', '7', '7', '0', '0'], ['1755637200000', '7', '7', '7', '7', '0', '0'], ['1755633600000', '7', '7', '7', '7', '0', '0'], ['1755630000000', '7', '7', '7', '7', '0', '0'], ['1755626400000', '7', '7', '7', '7', '0', '0'], ['1755622800000', '7', '7', '7', '7', '0', '0'], ['1755619200000', '7', '7', '7', '7', '0', '0'], ['1755615600000', '7', '7', '7', '7', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734364}
+2025-08-20 14:28:54.390 | WARNING  | app.risk.engine:load_instrument_info:55 - [MATICUSDT] Illiquid symbol detected. Skipping.
+2025-08-20 14:28:54.390 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'ADAUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.472 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for ADAUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'ADAUSDT', 'list': [['1755666000000', '0.861', '0.861', '0.861', '0.861', '0', '0'], ['1755662400000', '0.89', '0.89', '0.861', '0.861', '5.94', '5.11434'], ['1755658800000', '0.89', '0.89', '0.89', '0.89', '0', '0'], ['1755655200000', '0.89', '0.89', '0.89', '0.89', '0', '0'], ['1755651600000', '0.913', '0.913', '0.842', '0.89', '1234.3', '1048.78515'], ['1755648000000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755644400000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755640800000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755637200000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755633600000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755630000000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755626400000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755622800000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755619200000', '0.913', '0.913', '0.913', '0.913', '0', '0'], ['1755615600000', '0.913', '0.913', '0.913', '0.913', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734446}
+2025-08-20 14:28:54.472 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'USDCUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.551 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for USDCUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'USDCUSDT', 'list': [['1755666000000', '0.9174', '0.96', '0.863', '0.8765', '12206.771', '11108.8189723'], ['1755662400000', '0.7682', '0.941', '0.75', '0.9174', '26141.093', '22192.6586578'], ['1755658800000', '0.8', '0.8123', '0.75', '0.7682', '24803.545', '19156.6960938'], ['1755655200000', '0.7643', '0.8546', '0.75', '0.8', '25173.565', '19885.2653695'], ['1755651600000', '0.8123', '0.9362', '0.75', '0.7643', '27801.504', '22661.689767'], ['1755648000000', '0.8042', '0.8248', '0.75', '0.8123', '29088.583', '22540.5822493'], ['1755644400000', '0.8124', '0.8369', '0.75', '0.8042', '27533.135', '21720.850894'], ['1755640800000', '0.995', '1.0308', '0.7919', '0.8124', '25716.128', '23198.6984882'], ['1755637200000', '1.0243', '1.0358', '0.975', '0.995', '10525.145', '10661.5590348'], ['1755633600000', '1.024', '1.0244', '1.0232', '1.0243', '1014.395', '1038.5160197'], ['1755630000000', '1.3593', '1.7472', '0.941', '1.024', '19314.351', '21726.7583226'], ['1755626400000', '0.8589', '1.3593', '0.854', '1.3593', '25897.67', '25193.2349404'], ['1755622800000', '0.7567', '0.9036', '0.75', '0.8589', '25714.529', '20946.4950654'], ['1755619200000', '0.8332', '0.8546', '0.75', '0.7567', '27213.441', '21781.2745441'], ['1755615600000', '0.8589', '0.9362', '0.7839', '0.8332', '25483.514', '21357.3088879']]}, 'retExtInfo': {}, 'time': 1755667734526}
+2025-08-20 14:28:54.551 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'SOLUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.631 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for SOLUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'SOLUSDT', 'list': [['1755666000000', '192', '192', '192', '192', '0', '0'], ['1755662400000', '192', '192', '192', '192', '0', '0'], ['1755658800000', '192', '192', '192', '192', '0', '0'], ['1755655200000', '191.62', '192.64', '191.62', '192', '24.021', '4611.68875'], ['1755651600000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755648000000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755644400000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755640800000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755637200000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755633600000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755630000000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755626400000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755622800000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755619200000', '191.62', '191.62', '191.62', '191.62', '0', '0'], ['1755615600000', '191.62', '191.62', '191.62', '191.62', '0.369', '70.70778']]}, 'retExtInfo': {}, 'time': 1755667734607}
+2025-08-20 14:28:54.631 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'BTCUSDC', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.713 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for BTCUSDC: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'BTCUSDC', 'list': [['1755666000000', '130000', '130000', '130000', '130000', '0', '0'], ['1755662400000', '130000', '130000', '130000', '130000', '0', '0'], ['1755658800000', '130000', '130000', '130000', '130000', '0', '0'], ['1755655200000', '130000', '130000', '130000', '130000', '0', '0'], ['1755651600000', '122932.9', '130000', '122932.9', '130000', '0.000831', '107.84567338'], ['1755648000000', '118838.81', '122932.9', '118838.81', '122932.9', '0.000062', '7.6218398'], ['1755644400000', '118838.81', '118838.81', '118838.81', '118838.81', '0', '0'], ['1755640800000', '102510.04', '118838.81', '102510.04', '118838.81', '0.001599', '171.30860235'], ['1755637200000', '102510.04', '102510.04', '102510.04', '102510.04', '0', '0'], ['1755633600000', '102510.04', '102510.04', '102510.04', '102510.04', '0', '0'], ['1755630000000', '103717.73', '103717.73', '102510.04', '102510.04', '0.000439', '45.12026118'], ['1755626400000', '106133.11', '106133.11', '103717.73', '103717.73', '0.000337', '35.17992073'], ['1755622800000', '106133.11', '106133.11', '106133.11', '106133.11', '0', '0'], ['1755619200000', '106133.11', '106133.11', '106133.11', '106133.11', '0', '0'], ['1755615600000', '106133.11', '106133.11', '106133.11', '106133.11', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734688}
+2025-08-20 14:28:54.713 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'ETHUSDC', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.794 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for ETHUSDC: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'ETHUSDC', 'list': [['1755666000000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755662400000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755658800000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755655200000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755651600000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755648000000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755644400000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755640800000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755637200000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755633600000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755630000000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755626400000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755622800000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755619200000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0'], ['1755615600000', '4560.94', '4560.94', '4560.94', '4560.94', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734771}
+2025-08-20 14:28:54.794 | WARNING  | app.risk.engine:load_instrument_info:55 - [ETHUSDC] Illiquid symbol detected. Skipping.
+2025-08-20 14:28:54.794 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'AVAXUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:54.873 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for AVAXUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'AVAXUSDT', 'list': [['1755666000000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755662400000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755658800000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755655200000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755651600000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755648000000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755644400000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755640800000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755637200000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755633600000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755630000000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755626400000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755622800000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755619200000', '24.7', '24.7', '24.7', '24.7', '0', '0'], ['1755615600000', '24.7', '24.7', '24.7', '24.7', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667734850}
+2025-08-20 14:28:54.873 | WARNING  | app.risk.engine:load_instrument_info:55 - [AVAXUSDT] Illiquid symbol detected. Skipping.
+2025-08-20 14:28:54.873 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'BNBUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:55.093 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for BNBUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'BNBUSDT', 'list': [['1755666000000', '901', '901', '901', '901', '0', '0'], ['1755662400000', '901', '901', '901', '901', '0', '0'], ['1755658800000', '901', '901', '901', '901', '0', '0'], ['1755655200000', '921.24504', '922.52853', '895.59435', '901', '0.0466', '42.226018607'], ['1755651600000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755648000000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755644400000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755640800000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755637200000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755633600000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755630000000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755626400000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755622800000', '921.24504', '921.24504', '921.24504', '921.24504', '0', '0'], ['1755619200000', '923.10625', '923.36095', '880.53845', '921.24504', '0.3905', '358.324521782'], ['1755615600000', '932.97633', '932.97633', '879.15246', '923.10625', '0.488', '448.494215033']]}, 'retExtInfo': {}, 'time': 1755667735070}
+2025-08-20 14:28:55.093 | DEBUG    | app.exchange.bybit_client:get_kline:143 - Requesting kline with params: {'category': 'spot', 'symbol': 'MNTUSDT', 'interval': '60', 'limit': 15}
+2025-08-20 14:28:55.173 | DEBUG    | app.exchange.bybit_client:get_kline:145 - Received raw kline response for MNTUSDT: {'retCode': 0, 'retMsg': 'OK', 'result': {'category': 'spot', 'symbol': 'MNTUSDT', 'list': [['1755666000000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755662400000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755658800000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755655200000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755651600000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755648000000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755644400000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755640800000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755637200000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755633600000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755630000000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755626400000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755622800000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755619200000', '0.975', '0.975', '0.975', '0.975', '0', '0'], ['1755615600000', '0.975', '0.975', '0.975', '0.975', '0', '0']]}, 'retExtInfo': {}, 'time': 1755667735148}
+2025-08-20 14:28:55.173 | WARNING  | app.risk.engine:load_instrument_info:55 - [MNTUSDT] Illiquid symbol detected. Skipping.
+2025-08-20 14:28:55.173 | SUCCESS  | app.risk.engine:load_instrument_info:64 - Successfully loaded instrument info for 9 liquid symbols.
+2025-08-20 14:28:55.174 | INFO     | app.strategy.scalping:__init__:39 - ScalpingSignalGenerator initialized with imbalance threshold: 0.52, depth: 5
+2025-08-20 14:28:55.174 | INFO     | app.strategy.router:__init__:56 - Event-Driven StrategyRouter initialized with Position Monitor.
+2025-08-20 14:28:55.174 | INFO     | app.ws.manager:__init__:39 - WebSocketManager initialized.
+2025-08-20 14:28:55.257 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.78, PnL Day: 0.00, Coins: 6
+2025-08-20 14:28:55.257 | INFO     | app.state.store:set_initial_equity:92 - Initial equity for the day set to: 8995.78 USDT
+2025-08-20 14:28:55.257 | INFO     | app.trend.aggregator:run_connectors:76 - Starting all trend connectors and event processing loop...
+2025-08-20 14:28:55.257 | INFO     | app.ws.manager:broadcast_loop:79 - Starting WebSocket broadcast loop with 1.0s interval.
+2025-08-20 14:28:55.257 | INFO     | app.state.store:update_wallet_balance_loop:211 - Starting wallet balance update loop with 5s interval.
+2025-08-20 14:28:55.257 | INFO     | app.state.store:update_order_history_loop:223 - Starting order history update loop with 60s interval.
+2025-08-20 14:28:55.262 | INFO     | app.connectors.base:run:57 - Starting NewsAPI connector...
+2025-08-20 14:28:55.262 | INFO     | app.connectors.news_connector:_connect_and_stream:128 - Starting NewsConnector polling every 600 seconds.
+2025-08-20 14:28:55.262 | INFO     | app.connectors.base:run:57 - Starting Facebook connector...
+2025-08-20 14:28:55.262 | WARNING  | app.connectors.base:_connect_and_stream:98 - Running Facebook in MOCK mode. No real data will be fetched.
+2025-08-20 14:28:55.345 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.78, PnL Day: 0.00, Coins: 6
+2025-08-20 14:28:55.616 | INFO     | app.connectors.news_connector:_fetch_news:94 - Fetched 20 articles from NewsAPI.
+2025-08-20 14:28:55.617 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.67, Conf=0.67, Text='Solana (SOL) Falls Below Support, Will Bears Exten...'
+2025-08-20 14:28:55.617 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:28:55.617 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.83, Conf=0.83, Text='Ethereum Loses Steam After Nearing ATH—Analysts Wa...'
+2025-08-20 14:28:55.617 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:28:55.617 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.65, Conf=0.65, Text='Bitcoin Drops, Saylor Shops: 430 BTC Added To Trea...'
+2025-08-20 14:28:55.618 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:28:55.618 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'DOGEUSDT': Score=-0.69, Conf=0.69, Text='Qubic to target Dogecoin after 51% attack on Moner...'
+2025-08-20 14:28:55.618 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for DOGEUSDT: Sell
+2025-08-20 14:28:55.618 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.48, Conf=0.48, Text='Bitcoin bull and billionaire files for $250M SPAC ...'
+2025-08-20 14:28:55.618 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.00, Conf=0.00, Text='Solana beats market with $5.84B daily volume, but ...'
+2025-08-20 14:28:55.619 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.83, Conf=0.83, Text='ETHZilla Rebrands From 180 Life Sciences, But Stoc...'
+2025-08-20 14:28:55.619 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:28:55.619 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.93, Conf=0.93, Text='Bitcoin ETFs: Bitcoin Adoption Grows But Success C...'
+2025-08-20 14:28:55.619 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:28:55.619 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.88, Conf=0.88, Text='BTC slips 1.1% to $116K as traders brace for Augus...'
+2025-08-20 14:28:55.620 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:28:55.620 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.48, Conf=0.48, Text='‘All Eyes’ Are On This Week’s Fed Gathering After ...'
+2025-08-20 14:28:55.620 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.81, Conf=0.81, Text='Metaplanet Buys 775 BTC, Now Holds $1.94 Billion I...'
+2025-08-20 14:28:55.621 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:28:55.621 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'DOGEUSDT': Score=0.00, Conf=0.00, Text='500% Parabolic Dogecoin Run Could Be Closer Than Y...'
+2025-08-20 14:28:55.622 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.75, Conf=0.75, Text='Bitcoin at ‘mild danger zone’ as BTC investors eye...'
+2025-08-20 14:28:55.622 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:28:55.622 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.27, Conf=0.27, Text='Bitcoin, Ethereum, Dogecoin, XRP Slide As Crypto L...'
+2025-08-20 14:28:55.622 | INFO     | app.exchange.bybit_client:_ws_handler:301 - WebSocket connected to wss://stream-testnet.bybit.com/v5/public/spot
+2025-08-20 14:28:55.623 | DEBUG    | app.exchange.bybit_client:_ws_handler:313 - Sent subscription request for chunk: ['orderbook.50.BTCUSDT', 'orderbook.50.ETHUSDT', 'orderbook.50.XRPUSDT', 'orderbook.50.LINKUSDT', 'orderbook.50.ADAUSDT', 'orderbook.50.USDCUSDT', 'orderbook.50.SOLUSDT', 'orderbook.50.BTCUSDC', 'orderbook.50.BNBUSDT', 'publicTrade.BTCUSDT']
+2025-08-20 14:28:55.623 | DEBUG    | app.exchange.bybit_client:_ws_handler:313 - Sent subscription request for chunk: ['publicTrade.ETHUSDT', 'publicTrade.XRPUSDT', 'publicTrade.LINKUSDT', 'publicTrade.ADAUSDT', 'publicTrade.USDCUSDT', 'publicTrade.SOLUSDT', 'publicTrade.BTCUSDC', 'publicTrade.BNBUSDT']
+2025-08-20 14:28:55.666 | INFO     | app.exchange.bybit_client:_ws_handler:301 - WebSocket connected to wss://stream-testnet.bybit.com/v5/private
+2025-08-20 14:28:55.666 | DEBUG    | app.exchange.bybit_client:_ws_handler:313 - Sent subscription request for chunk: ['order', 'execution']
+2025-08-20 14:28:55.701 | INFO     | app.exchange.bybit_client:_ws_handler:320 - Subscribed to N/A: Success=True
+2025-08-20 14:28:55.703 | INFO     | app.exchange.bybit_client:_ws_handler:320 - Subscribed to N/A: Success=True
+2025-08-20 14:28:55.739 | DEBUG    | app.exchange.bybit_client:_ws_handler:324 - Received WS message: {'success': True, 'ret_msg': '', 'op': 'auth', 'conn_id': 'd266o6hqo29sqmnq4vk0-yy0m'}
+2025-08-20 14:28:55.744 | INFO     | app.exchange.bybit_client:_ws_handler:320 - Subscribed to N/A: Success=True
+2025-08-20 14:29:00.432 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.46, PnL Day: -0.32, Coins: 6
+2025-08-20 14:29:04.572 | INFO     | app.ws.manager:connect:64 - New WebSocket connection: Address(host='118.235.7.196', port=43122). Total clients: 1
+2025-08-20 14:29:05.400 | INFO     | app.api.routes_control:start_strategy:58 - Attempting to start strategy by user 'admin'...
+2025-08-20 14:29:05.400 | INFO     | app.strategy.router:start:71 - StrategyRouter, ScalpingGenerator, and PositionMonitor loops started.
+2025-08-20 14:29:05.400 | INFO     | app.strategy.router:_strategy_loop:95 - Starting event-driven strategy loop...
+2025-08-20 14:29:05.401 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:29:05.401 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.17).
+2025-08-20 14:29:05.402 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:29:05.402 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:29:05.402 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '899.55', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:29:05.402 | INFO     | app.strategy.scalping:run_loop:46 - Starting scalping signal generation loop with 1.0s interval.
+2025-08-20 14:29:05.402 | INFO     | app.strategy.router:_position_monitor_loop:122 - Position monitor loop started.
+2025-08-20 14:29:05.484 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021081967420085760', 'orderLinkId': '2021081967428474368'}
+2025-08-20 14:29:05.491 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021081967420085760', 'orderLinkId': '2021081967428474368', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '899.55000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '899.55000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667745460', 'updatedTime': '1755667745465', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:29:05.565 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.35, PnL Day: -0.43, Coins: 6
+2025-08-20 14:29:06.991 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:29:06.992 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for ETHUSDT.
+2025-08-20 14:29:06.992 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:29:06.992 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for BTCUSDT.
+2025-08-20 14:29:06.992 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for DOGEUSDT
+2025-08-20 14:29:06.992 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for DOGEUSDT.
+2025-08-20 14:29:06.992 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:29:06.993 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for ETHUSDT.
+2025-08-20 14:29:06.993 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:29:06.993 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for BTCUSDT.
+2025-08-20 14:29:06.993 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:29:06.994 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for BTCUSDT.
+2025-08-20 14:29:06.994 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:29:06.995 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for BTCUSDT.
+2025-08-20 14:29:06.995 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:29:06.995 | WARNING  | app.strategy.router:_strategy_loop:105 - Trade in progress for SOLUSDT. Ignoring new signal for BTCUSDT.
+2025-08-20 14:29:07.272 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is showing some weakness, be careful.
+2025-08-20 14:29:07.272 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.30, Conf=0.30, Text='$BTC is showing some weakness, be careful....'
+2025-08-20 14:29:08.589 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021081967420085760
+2025-08-20 14:29:10.656 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.12, PnL Day: -0.66, Coins: 6
+2025-08-20 14:29:11.998 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:29:15.785 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.12, PnL Day: -0.66, Coins: 6
+2025-08-20 14:29:20.906 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.25, PnL Day: -0.53, Coins: 6
+2025-08-20 14:29:22.670 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:29:22.671 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:29:22.671 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:29:22.671 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:29:26.035 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.23, PnL Day: -0.55, Coins: 6
+2025-08-20 14:29:31.154 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.23, PnL Day: -0.55, Coins: 6
+2025-08-20 14:29:34.616 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:29:34.616 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:29:34.617 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:29:34.617 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:29:36.253 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.27, PnL Day: -0.50, Coins: 6
+2025-08-20 14:29:41.369 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.26, PnL Day: -0.52, Coins: 6
+2025-08-20 14:29:45.012 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:29:45.012 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:29:45.012 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:29:45.013 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:29:46.491 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.28, PnL Day: -0.50, Coins: 6
+2025-08-20 14:29:51.755 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.00, PnL Day: -0.78, Coins: 6
+2025-08-20 14:29:56.846 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.03, PnL Day: -0.75, Coins: 6
+2025-08-20 14:30:01.965 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.80, PnL Day: -0.98, Coins: 6
+2025-08-20 14:30:03.875 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:30:03.875 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:30:03.875 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:30:03.875 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:30:03.876 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for BTCUSDT. Asset already held with sufficient value ($911.54).
+2025-08-20 14:30:07.082 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.07, PnL Day: -0.71, Coins: 6
+2025-08-20 14:30:12.194 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.07, PnL Day: -0.71, Coins: 6
+2025-08-20 14:30:17.329 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.02, PnL Day: -0.76, Coins: 6
+2025-08-20 14:30:19.070 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:30:19.070 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:30:22.431 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.16, PnL Day: -0.62, Coins: 6
+2025-08-20 14:30:27.546 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.17, PnL Day: -0.61, Coins: 6
+2025-08-20 14:30:32.666 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8994.93, PnL Day: -0.85, Coins: 6
+2025-08-20 14:30:37.763 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.04, PnL Day: -0.74, Coins: 6
+2025-08-20 14:30:38.644 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL just announced a new partnership, looks very promising.
+2025-08-20 14:30:38.644 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.78, Conf=0.78, Text='$SOL just announced a new partnership, looks very ...'
+2025-08-20 14:30:38.644 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:30:38.644 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:30:38.645 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.17).
+2025-08-20 14:30:38.646 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:30:38.646 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:30:38.646 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '899.5', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:30:38.733 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021082749632615936', 'orderLinkId': '2021082749632615937'}
+2025-08-20 14:30:38.737 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021082749632615936', 'orderLinkId': '2021082749632615937', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '899.50000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '899.50000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667838707', 'updatedTime': '1755667838711', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:30:41.831 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021082749632615936
+2025-08-20 14:30:42.862 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.26, PnL Day: -0.51, Coins: 6
+2025-08-20 14:30:45.242 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:30:47.995 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.08, PnL Day: -0.70, Coins: 6
+2025-08-20 14:30:50.723 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL just announced a new partnership, looks very promising.
+2025-08-20 14:30:50.723 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.78, Conf=0.78, Text='$SOL just announced a new partnership, looks very ...'
+2025-08-20 14:30:50.723 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:30:50.724 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:30:53.115 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.00, PnL Day: -0.78, Coins: 6
+2025-08-20 14:30:58.208 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.06, PnL Day: -0.71, Coins: 6
+2025-08-20 14:31:03.344 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.07, PnL Day: -0.71, Coins: 6
+2025-08-20 14:31:08.462 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8995.18, PnL Day: -0.60, Coins: 6
+2025-08-20 14:31:08.680 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH just announced a new partnership, looks very promising.
+2025-08-20 14:31:08.680 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.78, Conf=0.78, Text='$ETH just announced a new partnership, looks very ...'
+2025-08-20 14:31:08.680 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:31:08.680 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:31:08.681 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset ETHUSDT (value: $0.03).
+2025-08-20 14:31:08.682 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for ETHUSDT approved by RiskEngine.
+2025-08-20 14:31:08.682 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for ETHUSDT.
+2025-08-20 14:31:08.682 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '899.52', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:31:08.765 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for ETHUSDT: {'orderId': '2021083001584457216', 'orderLinkId': '2021083001592845824'}
+2025-08-20 14:31:08.773 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021083001584457216', 'orderLinkId': '2021083001592845824', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '899.5200000', 'avgPrice': '4053.07', 'leavesQty': '0', 'leavesValue': '0.0203158', 'cumExecQty': '0.22193', 'cumExecValue': '899.4996842', 'cumExecFee': '0.000177544', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '3898.29', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667868742', 'updatedTime': '1755667868746', 'feeCurrency': 'ETH', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:31:11.867 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021083001584457216
+2025-08-20 14:31:13.555 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.81, PnL Day: 23.03, Coins: 6
+2025-08-20 14:31:15.286 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:31:18.683 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.17, PnL Day: 23.39, Coins: 6
+2025-08-20 14:31:23.822 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.05, PnL Day: 23.27, Coins: 6
+2025-08-20 14:31:25.231 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:31:25.231 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:31:28.931 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.59, PnL Day: 22.81, Coins: 6
+2025-08-20 14:31:34.196 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.92, PnL Day: 23.14, Coins: 6
+2025-08-20 14:31:39.314 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.50, PnL Day: 22.72, Coins: 6
+2025-08-20 14:31:42.607 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:31:42.607 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:31:44.586 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.62, PnL Day: 22.85, Coins: 6
+2025-08-20 14:31:49.708 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.16, PnL Day: 22.38, Coins: 6
+2025-08-20 14:31:54.818 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9017.96, PnL Day: 22.18, Coins: 6
+2025-08-20 14:31:55.634 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:31:55.634 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:31:55.634 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:31:55.634 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:31:55.635 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for BTCUSDT. Asset already held with sufficient value ($917.70).
+2025-08-20 14:31:59.913 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.21, PnL Day: 22.43, Coins: 6
+2025-08-20 14:32:05.036 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.03, PnL Day: 22.25, Coins: 6
+2025-08-20 14:32:10.143 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9017.98, PnL Day: 22.20, Coins: 6
+2025-08-20 14:32:11.772 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH just announced a new partnership, looks very promising.
+2025-08-20 14:32:11.772 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.78, Conf=0.78, Text='$ETH just announced a new partnership, looks very ...'
+2025-08-20 14:32:11.772 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:32:11.772 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:32:11.773 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for ETHUSDT, no orderbook data to get current price.
+2025-08-20 14:32:15.249 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9017.89, PnL Day: 22.11, Coins: 6
+2025-08-20 14:32:20.379 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.01, PnL Day: 22.23, Coins: 6
+2025-08-20 14:32:22.651 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:32:22.651 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:32:22.652 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:32:22.652 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:32:22.652 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.17).
+2025-08-20 14:32:22.653 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:32:22.653 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:32:22.654 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '901.8', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:32:22.737 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021083622098179584', 'orderLinkId': '2021083622098179585'}
+2025-08-20 14:32:22.743 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021083622098179584', 'orderLinkId': '2021083622098179585', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '901.80000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '901.80000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755667942713', 'updatedTime': '1755667942717', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:32:25.473 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.35, PnL Day: 22.57, Coins: 6
+2025-08-20 14:32:25.852 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021083622098179584
+2025-08-20 14:32:29.251 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:32:30.565 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.81, PnL Day: 23.03, Coins: 6
+2025-08-20 14:32:34.311 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:32:34.311 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:32:34.311 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:32:34.311 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:32:35.824 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.88, PnL Day: 23.10, Coins: 6
+2025-08-20 14:32:40.933 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.88, PnL Day: 23.10, Coins: 6
+2025-08-20 14:32:46.042 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.92, PnL Day: 23.14, Coins: 6
+2025-08-20 14:32:51.168 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.15, PnL Day: 23.37, Coins: 6
+2025-08-20 14:32:54.314 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL just announced a new partnership, looks very promising.
+2025-08-20 14:32:54.314 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.78, Conf=0.78, Text='$SOL just announced a new partnership, looks very ...'
+2025-08-20 14:32:54.315 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:32:54.315 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:32:56.252 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.76, PnL Day: 22.98, Coins: 6
+2025-08-20 14:33:01.367 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.84, PnL Day: 23.06, Coins: 6
+2025-08-20 14:33:06.473 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.95, PnL Day: 23.17, Coins: 6
+2025-08-20 14:33:11.583 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.75, PnL Day: 22.97, Coins: 6
+2025-08-20 14:33:12.986 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:33:12.986 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:33:12.986 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:33:12.986 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:33:12.987 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for ETHUSDT. Asset already held with sufficient value ($909.22).
+2025-08-20 14:33:16.705 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.47, PnL Day: 22.70, Coins: 6
+2025-08-20 14:33:21.834 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.14, PnL Day: 22.36, Coins: 6
+2025-08-20 14:33:23.616 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL looks bearish, might dump soon.
+2025-08-20 14:33:23.616 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.79, Conf=0.79, Text='$SOL looks bearish, might dump soon....'
+2025-08-20 14:33:23.616 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Sell
+2025-08-20 14:33:23.616 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:33:23.617 | DEBUG    | app.strategy.router:_evaluate_signal:186 - Sell signal for SOLUSDT ignored. Asset value ($0.1649) is below minimum.
+2025-08-20 14:33:26.951 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.27, PnL Day: 22.49, Coins: 6
+2025-08-20 14:33:32.059 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.30, PnL Day: 22.52, Coins: 6
+2025-08-20 14:33:37.186 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.34, PnL Day: 22.56, Coins: 6
+2025-08-20 14:33:40.627 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH just announced a new partnership, looks very promising.
+2025-08-20 14:33:40.628 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.78, Conf=0.78, Text='$ETH just announced a new partnership, looks very ...'
+2025-08-20 14:33:40.628 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:33:40.628 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:33:40.629 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for ETHUSDT, no orderbook data to get current price.
+2025-08-20 14:33:42.439 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.48, PnL Day: 22.71, Coins: 6
+2025-08-20 14:33:47.539 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.97, PnL Day: 23.19, Coins: 6
+2025-08-20 14:33:52.682 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.80, PnL Day: 23.02, Coins: 6
+2025-08-20 14:33:53.149 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:33:53.149 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:33:57.785 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.75, PnL Day: 22.97, Coins: 6
+2025-08-20 14:34:02.888 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9018.62, PnL Day: 22.84, Coins: 6
+2025-08-20 14:34:05.868 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is about to pump! To the moon!
+2025-08-20 14:34:05.868 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.84, Conf=0.84, Text='$SOL is about to pump! To the moon!...'
+2025-08-20 14:34:05.868 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:34:05.869 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:34:05.870 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.16).
+2025-08-20 14:34:05.872 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:34:05.873 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:34:05.873 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '901.86', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:34:05.957 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021084487953520128', 'orderLinkId': '2021084487953520129'}
+2025-08-20 14:34:05.963 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021084487953520128', 'orderLinkId': '2021084487953520129', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '901.86000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '901.86000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755668045930', 'updatedTime': '1755668045935', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:34:07.985 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.31, PnL Day: 23.53, Coins: 6
+2025-08-20 14:34:09.071 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021084487953520128
+2025-08-20 14:34:12.480 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:34:13.080 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.49, PnL Day: 23.71, Coins: 6
+2025-08-20 14:34:18.318 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.18, PnL Day: 23.40, Coins: 6
+2025-08-20 14:34:18.753 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:34:18.753 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:34:18.753 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:34:18.754 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:34:18.755 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for BTCUSDT. Asset already held with sufficient value ($917.70).
+2025-08-20 14:34:23.428 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.09, PnL Day: 23.32, Coins: 6
+2025-08-20 14:34:28.690 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.07, PnL Day: 23.29, Coins: 6
+2025-08-20 14:34:29.064 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:34:29.065 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:34:29.065 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:34:29.065 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:34:29.066 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for ETHUSDT, no orderbook data to get current price.
+2025-08-20 14:34:33.824 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.75, PnL Day: 23.97, Coins: 6
+2025-08-20 14:34:38.930 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 9019.70, PnL Day: 23.92, Coins: 6
+2025-08-20 14:34:43.535 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:34:43.536 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:34:43.536 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:34:43.536 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:34:43.537 | INFO     | app.strategy.router:_evaluate_signal:190 - [EVALUATION] SELL signal for ETHUSDT. Proceeding to sell.
+2025-08-20 14:34:43.537 | CRITICAL | app.strategy.router:_execute_sell_trade:264 - LOCKING TRADES: Submitting SELL order for ETHUSDT.
+2025-08-20 14:34:43.624 | DEBUG    | app.exchange.bybit_client:place_market_order:245 - [ETHUSDT] Adjusting qty. Original: 0.22176044, Step: 0, MinQty: 0.00001
+2025-08-20 14:34:43.624 | INFO     | app.exchange.bybit_client:place_market_order:268 - Original sell qty: 0.22176044, Adjusted sell qty: 0.22176 for symbol ETHUSDT
+2025-08-20 14:34:43.624 | INFO     | app.exchange.bybit_client:place_market_order:275 - Submitting SPOT market order by QTY: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Sell', 'orderType': 'Market', 'qty': '0.22176'}
+2025-08-20 14:34:43.705 | SUCCESS  | app.strategy.router:_execute_sell_trade:270 - SPOT SELL order submitted for ETHUSDT: {'orderId': '2021084804631860736', 'orderLinkId': '2021084804631860737'}
+2025-08-20 14:34:43.714 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021084804631860736', 'orderLinkId': '2021084804631860737', 'blockTradeId': '', 'side': 'Sell', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '0.22176', 'avgPrice': '3736.95', 'leavesQty': '0', 'leavesValue': '0.0000000', 'cumExecQty': '0.22176', 'cumExecValue': '828.7070395', 'cumExecFee': '0.6629656316', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '4099.99', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'baseCoin', 'createdTime': '1755668083682', 'updatedTime': '1755668083686', 'feeCurrency': 'USDT', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:34:44.021 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8924.35, PnL Day: -71.43, Coins: 6
+2025-08-20 14:34:45.297 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021084804631860736
+2025-08-20 14:34:48.710 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:34:49.123 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8924.22, PnL Day: -71.56, Coins: 6
+2025-08-20 14:34:54.238 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8924.24, PnL Day: -71.53, Coins: 6
+2025-08-20 14:34:59.334 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8924.17, PnL Day: -71.61, Coins: 6
+2025-08-20 14:35:03.354 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:35:03.355 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:35:03.355 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:35:03.355 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:35:03.357 | DEBUG    | app.strategy.router:_evaluate_signal:206 - Ignoring BUY signal for BTCUSDT. Asset already held with sufficient value ($917.70).
+2025-08-20 14:35:04.605 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8924.11, PnL Day: -71.67, Coins: 6
+2025-08-20 14:35:09.740 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8923.80, PnL Day: -71.98, Coins: 6
+2025-08-20 14:35:14.864 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8924.11, PnL Day: -71.67, Coins: 6
+2025-08-20 14:35:16.583 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is showing some weakness, be careful.
+2025-08-20 14:35:16.584 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.30, Conf=0.30, Text='$ETH is showing some weakness, be careful....'
+2025-08-20 14:35:20.118 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8923.95, PnL Day: -71.83, Coins: 6
+2025-08-20 14:35:25.264 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8923.96, PnL Day: -71.82, Coins: 6
+2025-08-20 14:35:30.373 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8923.51, PnL Day: -72.27, Coins: 6
+2025-08-20 14:35:32.022 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC looks bearish, might dump soon.
+2025-08-20 14:35:32.022 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.79, Conf=0.79, Text='$BTC looks bearish, might dump soon....'
+2025-08-20 14:35:32.023 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Sell
+2025-08-20 14:35:32.023 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:35:32.023 | INFO     | app.strategy.router:_evaluate_signal:190 - [EVALUATION] SELL signal for BTCUSDT. Proceeding to sell.
+2025-08-20 14:35:32.023 | CRITICAL | app.strategy.router:_execute_sell_trade:264 - LOCKING TRADES: Submitting SELL order for BTCUSDT.
+2025-08-20 14:35:32.107 | DEBUG    | app.exchange.bybit_client:place_market_order:245 - [BTCUSDT] Adjusting qty. Original: 0.00773676, Step: 0, MinQty: 0.000001
+2025-08-20 14:35:32.107 | INFO     | app.exchange.bybit_client:place_market_order:268 - Original sell qty: 0.00773676, Adjusted sell qty: 0.007736 for symbol BTCUSDT
+2025-08-20 14:35:32.107 | INFO     | app.exchange.bybit_client:place_market_order:275 - Submitting SPOT market order by QTY: {'category': 'spot', 'symbol': 'BTCUSDT', 'side': 'Sell', 'orderType': 'Market', 'qty': '0.007736'}
+2025-08-20 14:35:32.200 | SUCCESS  | app.strategy.router:_execute_sell_trade:270 - SPOT SELL order submitted for BTCUSDT: {'orderId': '2021085211412239872', 'orderLinkId': '2021085211412239873'}
+2025-08-20 14:35:32.207 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'BTCUSDT', 'orderId': '2021085211412239872', 'orderLinkId': '2021085211412239873', 'blockTradeId': '', 'side': 'Sell', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '0.007736', 'avgPrice': '117247.25', 'leavesQty': '0', 'leavesValue': '0.00000000', 'cumExecQty': '0.007736', 'cumExecValue': '907.02474443', 'cumExecFee': '0.725619795544', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '118670.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'baseCoin', 'createdTime': '1755668132174', 'updatedTime': '1755668132180', 'feeCurrency': 'USDT', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:35:33.802 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021085211412239872
+2025-08-20 14:35:35.465 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8950.88, PnL Day: -44.90, Coins: 6
+2025-08-20 14:35:37.213 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for BTCUSDT is considered complete.
+2025-08-20 14:35:40.582 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.74, PnL Day: -44.04, Coins: 6
+2025-08-20 14:35:43.261 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:35:43.261 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:35:43.262 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:35:43.262 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:35:45.687 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.12, PnL Day: -44.66, Coins: 6
+2025-08-20 14:35:50.805 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.26, PnL Day: -44.52, Coins: 6
+2025-08-20 14:35:55.929 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.28, PnL Day: -44.50, Coins: 6
+2025-08-20 14:36:00.367 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:36:00.367 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:36:00.368 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:36:00.368 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:36:01.026 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.04, PnL Day: -44.74, Coins: 6
+2025-08-20 14:36:06.133 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.21, PnL Day: -44.57, Coins: 6
+2025-08-20 14:36:11.270 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.22, PnL Day: -44.56, Coins: 6
+2025-08-20 14:36:15.598 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is about to pump! To the moon!
+2025-08-20 14:36:15.598 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.84, Conf=0.84, Text='$BTC is about to pump! To the moon!...'
+2025-08-20 14:36:15.598 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:36:15.599 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:36:16.383 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.12, PnL Day: -44.65, Coins: 6
+2025-08-20 14:36:21.504 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.03, PnL Day: -44.74, Coins: 6
+2025-08-20 14:36:26.631 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8951.56, PnL Day: -44.21, Coins: 6
+2025-08-20 14:36:26.687 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:36:26.687 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:36:26.687 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:36:26.687 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:36:26.688 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset ETHUSDT (value: $0.00).
+2025-08-20 14:36:26.689 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for ETHUSDT approved by RiskEngine.
+2025-08-20 14:36:26.689 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for ETHUSDT.
+2025-08-20 14:36:26.690 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '895.16', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:36:26.776 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for ETHUSDT: {'orderId': '2021085669228910080', 'orderLinkId': '2021085669228910081'}
+2025-08-20 14:36:26.783 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021085669228910080', 'orderLinkId': '2021085669228910081', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '895.1600000', 'avgPrice': '3963.24', 'leavesQty': '0', 'leavesValue': '0.0209080', 'cumExecQty': '0.22586', 'cumExecValue': '895.1390920', 'cumExecFee': '0.000180688', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '3717.82', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755668186750', 'updatedTime': '1755668186755', 'feeCurrency': 'ETH', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:36:29.887 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021085669228910080
+2025-08-20 14:36:31.725 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.77, PnL Day: 0.99, Coins: 6
+2025-08-20 14:36:33.302 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:36:36.979 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.72, PnL Day: 0.94, Coins: 6
+2025-08-20 14:36:42.078 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL just announced a new partnership, looks very promising.
+2025-08-20 14:36:42.078 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=0.78, Conf=0.78, Text='$SOL just announced a new partnership, looks very ...'
+2025-08-20 14:36:42.078 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for SOLUSDT: Buy
+2025-08-20 14:36:42.078 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for SOLUSDT
+2025-08-20 14:36:42.080 | INFO     | app.strategy.router:_evaluate_signal:202 - [EVALUATION] Topping up dust asset SOLUSDT (value: $0.16).
+2025-08-20 14:36:42.081 | INFO     | app.strategy.router:_evaluate_signal:213 - [EVALUATION] BUY signal for SOLUSDT approved by RiskEngine.
+2025-08-20 14:36:42.082 | CRITICAL | app.strategy.router:_execute_buy_trade:233 - LOCKING TRADES: Submitting BUY order for SOLUSDT.
+2025-08-20 14:36:42.082 | INFO     | app.exchange.bybit_client:place_market_order:232 - Submitting SPOT market order by NOTIONAL value: {'category': 'spot', 'symbol': 'SOLUSDT', 'side': 'Buy', 'orderType': 'Market', 'qty': '899.67', 'marketUnit': 'quoteCoin'}
+2025-08-20 14:36:42.177 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.53, PnL Day: 0.75, Coins: 6
+2025-08-20 14:36:42.321 | SUCCESS  | app.strategy.router:_execute_buy_trade:239 - SPOT BUY order submitted for SOLUSDT: {'orderId': '2021085799235556864', 'orderLinkId': '2021085799235556865'}
+2025-08-20 14:36:42.321 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'SOLUSDT', 'orderId': '2021085799235556864', 'orderLinkId': '2021085799235556865', 'blockTradeId': '', 'side': 'Buy', 'positionIdx': 0, 'orderStatus': 'Cancelled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_CancelForNoFullFill', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '899.67000', 'avgPrice': '', 'leavesQty': '0', 'leavesValue': '899.67000', 'cumExecQty': '0', 'cumExecValue': '0.00000', 'cumExecFee': '0', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '192.00', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'quoteCoin', 'createdTime': '1755668202248', 'updatedTime': '1755668202252', 'feeCurrency': '', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:36:45.427 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021085799235556864
+2025-08-20 14:36:47.268 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.84, PnL Day: 1.06, Coins: 6
+2025-08-20 14:36:48.838 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for SOLUSDT is considered complete.
+2025-08-20 14:36:52.376 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.85, PnL Day: 1.07, Coins: 6
+2025-08-20 14:36:56.679 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:36:56.679 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:36:57.459 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.28, PnL Day: 0.50, Coins: 6
+2025-08-20 14:37:02.612 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.49, PnL Day: 0.71, Coins: 6
+2025-08-20 14:37:07.730 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.59, PnL Day: 0.81, Coins: 6
+2025-08-20 14:37:11.339 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:37:11.339 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:37:12.842 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.68, PnL Day: 0.90, Coins: 6
+2025-08-20 14:37:17.953 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.59, PnL Day: 0.81, Coins: 6
+2025-08-20 14:37:22.077 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:37:22.077 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:37:22.078 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:37:22.078 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:37:23.053 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.56, PnL Day: 0.78, Coins: 6
+2025-08-20 14:37:28.153 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.52, PnL Day: 0.74, Coins: 6
+2025-08-20 14:37:33.292 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.19, PnL Day: 0.41, Coins: 6
+2025-08-20 14:37:38.404 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.78, PnL Day: 1.00, Coins: 6
+2025-08-20 14:37:39.982 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:37:39.982 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:37:39.982 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:37:39.982 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:37:39.983 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for BTCUSDT, no orderbook data to get current price.
+2025-08-20 14:37:43.524 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.79, PnL Day: 1.01, Coins: 6
+2025-08-20 14:37:48.636 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8996.84, PnL Day: 1.07, Coins: 6
+2025-08-20 14:37:51.236 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:37:51.237 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:37:51.237 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:37:51.237 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:37:51.238 | INFO     | app.strategy.router:_evaluate_signal:190 - [EVALUATION] SELL signal for ETHUSDT. Proceeding to sell.
+2025-08-20 14:37:51.238 | CRITICAL | app.strategy.router:_execute_sell_trade:264 - LOCKING TRADES: Submitting SELL order for ETHUSDT.
+2025-08-20 14:37:51.238 | DEBUG    | app.exchange.bybit_client:place_market_order:245 - [ETHUSDT] Adjusting qty. Original: 0.22567975, Step: 0, MinQty: 0.00001
+2025-08-20 14:37:51.238 | INFO     | app.exchange.bybit_client:place_market_order:268 - Original sell qty: 0.22567975, Adjusted sell qty: 0.22567 for symbol ETHUSDT
+2025-08-20 14:37:51.238 | INFO     | app.exchange.bybit_client:place_market_order:275 - Submitting SPOT market order by QTY: {'category': 'spot', 'symbol': 'ETHUSDT', 'side': 'Sell', 'orderType': 'Market', 'qty': '0.22567'}
+2025-08-20 14:37:51.322 | SUCCESS  | app.strategy.router:_execute_sell_trade:270 - SPOT SELL order submitted for ETHUSDT: {'orderId': '2021086378460550656', 'orderLinkId': '2021086378460550657'}
+2025-08-20 14:37:51.329 | INFO     | app.exchange.bybit_client:_process_ws_message:347 - Order update: {'category': 'spot', 'symbol': 'ETHUSDT', 'orderId': '2021086378460550656', 'orderLinkId': '2021086378460550657', 'blockTradeId': '', 'side': 'Sell', 'positionIdx': 0, 'orderStatus': 'Filled', 'cancelType': 'UNKNOWN', 'rejectReason': 'EC_NoError', 'timeInForce': 'IOC', 'isLeverage': '0', 'price': '0', 'qty': '0.22567', 'avgPrice': '3732.03', 'leavesQty': '0', 'leavesValue': '0.0000000', 'cumExecQty': '0.22567', 'cumExecValue': '842.2084838', 'cumExecFee': '0.67376678704', 'orderType': 'Market', 'stopOrderType': '', 'orderIv': '', 'triggerPrice': '0.00', 'takeProfit': '0.00', 'stopLoss': '0.00', 'triggerBy': '', 'tpTriggerBy': '', 'slTriggerBy': '', 'triggerDirection': 0, 'placeType': '', 'lastPriceOnCreated': '4099.99', 'closeOnTrigger': False, 'reduceOnly': False, 'smpGroup': 0, 'smpType': 'None', 'smpOrderId': '', 'slLimitPrice': '0.00', 'tpLimitPrice': '0.00', 'marketUnit': 'baseCoin', 'createdTime': '1755668271297', 'updatedTime': '1755668271301', 'feeCurrency': 'USDT', 'slippageTolerance': '', 'slippageToleranceType': 'UNKNOWN'}
+2025-08-20 14:37:52.926 | INFO     | app.state.store:add_trade:194 - Trade history updated with order 2021086378460550656
+2025-08-20 14:37:53.720 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.73, PnL Day: -98.05, Coins: 6
+2025-08-20 14:37:56.333 | CRITICAL | app.strategy.router:_unlock_trade:295 - UNLOCKING TRADES: Trade for ETHUSDT is considered complete.
+2025-08-20 14:37:58.805 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.76, PnL Day: -98.02, Coins: 6
+2025-08-20 14:38:03.932 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.93, PnL Day: -97.85, Coins: 6
+2025-08-20 14:38:05.803 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:38:05.804 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:38:09.047 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.92, PnL Day: -97.85, Coins: 6
+2025-08-20 14:38:14.155 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.93, PnL Day: -97.85, Coins: 6
+2025-08-20 14:38:17.235 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH is about to pump! To the moon!
+2025-08-20 14:38:17.235 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=0.84, Conf=0.84, Text='$ETH is about to pump! To the moon!...'
+2025-08-20 14:38:17.235 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Buy
+2025-08-20 14:38:17.236 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:38:19.270 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.75, PnL Day: -98.03, Coins: 6
+2025-08-20 14:38:24.392 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.84, PnL Day: -97.93, Coins: 6
+2025-08-20 14:38:28.269 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $SOL is showing some weakness, be careful.
+2025-08-20 14:38:28.269 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'SOLUSDT': Score=-0.30, Conf=0.30, Text='$SOL is showing some weakness, be careful....'
+2025-08-20 14:38:29.506 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.91, PnL Day: -97.87, Coins: 6
+2025-08-20 14:38:34.617 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.94, PnL Day: -97.84, Coins: 6
+2025-08-20 14:38:39.719 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.98, PnL Day: -97.80, Coins: 6
+2025-08-20 14:38:44.840 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.99, PnL Day: -97.79, Coins: 6
+2025-08-20 14:38:45.807 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $ETH looks bearish, might dump soon.
+2025-08-20 14:38:45.807 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'ETHUSDT': Score=-0.79, Conf=0.79, Text='$ETH looks bearish, might dump soon....'
+2025-08-20 14:38:45.807 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for ETHUSDT: Sell
+2025-08-20 14:38:45.807 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for ETHUSDT
+2025-08-20 14:38:49.951 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.99, PnL Day: -97.79, Coins: 6
+2025-08-20 14:38:55.198 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.56, PnL Day: -98.22, Coins: 6
+2025-08-20 14:38:55.979 | INFO     | app.connectors.news_connector:_fetch_news:94 - Fetched 20 articles from NewsAPI.
+2025-08-20 14:38:57.186 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC is showing some weakness, be careful.
+2025-08-20 14:38:57.186 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=-0.30, Conf=0.30, Text='$BTC is showing some weakness, be careful....'
+2025-08-20 14:39:00.291 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.55, PnL Day: -98.23, Coins: 6
+2025-08-20 14:39:05.432 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.45, PnL Day: -98.33, Coins: 6
+2025-08-20 14:39:10.738 | INFO     | app.state.store:update_wallet_balance:160 - Wallet balance updated. Equity: 8897.44, PnL Day: -98.34, Coins: 6
+2025-08-20 14:39:10.738 | INFO     | app.ws.manager:disconnect:72 - WebSocket connection closed: Address(host='118.235.7.196', port=43122). Total clients: 0
+2025-08-20 14:39:10.759 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:39:10.759 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:39:10.759 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:39:10.759 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:39:10.760 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for BTCUSDT, no orderbook data to get current price.
+2025-08-20 14:39:15.748 | WARNING  | app.utils.retry:wrapper:55 - Function '_request' failed (attempt 1/3). Retrying in 2.00s. Error: [Errno 22] Invalid argument
+2025-08-20 14:39:17.762 | WARNING  | app.utils.retry:wrapper:55 - Function '_request' failed (attempt 2/3). Retrying in 4.00s. Error: [Errno 22] Invalid argument
+2025-08-20 14:39:21.765 | WARNING  | app.utils.retry:wrapper:55 - Function '_request' failed (attempt 3/3). Retrying in 8.00s. Error: [Errno 22] Invalid argument
+2025-08-20 14:39:21.765 | ERROR    | app.utils.retry:wrapper:60 - Function '_request' failed after 3 attempts.
+2025-08-20 14:39:21.765 | ERROR    | app.state.store:update_wallet_balance:163 - Failed to update wallet balance: [Errno 22] Invalid argument
+2025-08-20 14:39:26.770 | WARNING  | app.utils.retry:wrapper:55 - Function '_request' failed (attempt 1/3). Retrying in 2.00s. Error: [Errno 22] Invalid argument
+2025-08-20 14:39:28.778 | WARNING  | app.utils.retry:wrapper:55 - Function '_request' failed (attempt 2/3). Retrying in 4.00s. Error: [Errno 22] Invalid argument
+2025-08-20 14:39:29.270 | INFO     | app.connectors.base:_connect_and_stream:122 - [MOCK] Generated trend event: $BTC just announced a new partnership, looks very promising.
+2025-08-20 14:39:29.270 | DEBUG    | app.trend.scorer:score_event:85 - Scored event for symbol 'BTCUSDT': Score=0.78, Conf=0.78, Text='$BTC just announced a new partnership, looks very ...'
+2025-08-20 14:39:29.270 | INFO     | app.trend.aggregator:_generate_and_send_signal:125 - [TREND SIGNAL] Sent new signal to queue for BTCUSDT: Buy
+2025-08-20 14:39:29.270 | DEBUG    | app.strategy.router:_strategy_loop:99 - Received signal from queue: trend for BTCUSDT
+2025-08-20 14:39:29.271 | WARNING  | app.strategy.router:_evaluate_signal:172 - Cannot evaluate signal for BTCUSDT, no orderbook data to get current price.
+2025-08-20 14:39:32.786 | WARNING  | app.utils.retry:wrapper:55 - Function '_request' failed (attempt 3/3). Retrying in 8.00s. Error: [Errno 22] Invalid argument
+2025-08-20 14:39:32.787 | ERROR    | app.utils.retry:wrapper:60 - Function '_request' failed after 3 attempts.
+2025-08-20 14:39:32.787 | ERROR    | app.state.store:update_wallet_balance:163 - Failed to update wallet balance: [Errno 22] Invalid argument
