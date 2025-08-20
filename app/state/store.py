@@ -1,22 +1,23 @@
 # ===================================================================================
-#   state/store.py: 인메모리 상태 저장소 (최종 수정본)
+#   state/store.py: 인메모리 상태 저장소 (최종 통합본)
 # ===================================================================================
 #
 #   **핵심 변경사항:**
-#   - `update_wallet_balance` 함수를 수정하여 Bybit API로부터 받은 계좌 잔고(dict 리스트)를
-#     `Position` 객체 리스트로 명시적으로 변환한 후 `SystemState.active_positions`에 저장하도록
-#     변경했습니다.
-#   - 이 수정으로 `PydanticSerializationUnexpectedValue` 경고가 더 이상 발생하지 않습니다.
+#   - router.py에서 호출하는 `get_position` 메서드를 추가하여, 매수 직후 포지션의
+#     상세 정보(entry_price 등)를 기록할 수 있도록 수정했습니다.
+#   - PydanticSerializationWarning을 해결하기 위해 `update_wallet_balance`에서
+#     API 응답(dict)을 `Position` 객체로 변환하는 로직을 포함합니다.
 #
 #
 import asyncio
+import time
 from collections import deque
-from typing import Deque, Dict, List
+from typing import Deque, Dict, List, Optional
 
 from loguru import logger
 
 from app.exchange.models import Order, CoinBalance
-from app.state.models import RiskConfig, SystemState, Position  # Position 모델 import
+from app.state.models import RiskConfig, SystemState, Position
 from app.utils.typing import TrendEvent
 from app.utils.time import now
 from app.assets import universe
@@ -41,7 +42,6 @@ class StateStore:
         self._recent_errors_deque: Deque[str] = deque(maxlen=max_events)
         self._trend_summary_deque: Deque[TrendEvent] = deque(maxlen=max_events)
 
-        # SystemState 내부의 리스트들을 deque로 초기화
         self._system_state.recent_trades = list(self._recent_trades_deque)
         self._system_state.recent_errors = list(self._recent_errors_deque)
         self._system_state.trend_summary = list(self._trend_summary_deque)
@@ -75,6 +75,16 @@ class StateStore:
     def get_universe(self) -> List[str]:
         return self._universe
 
+    def get_position(self, symbol: str) -> Optional[Position]:
+        """
+        [신규 추가] 특정 심볼의 포지션 객체를 반환합니다.
+        """
+        # self._system_state는 Pydantic 모델이므로 직접 순회하여 객체를 찾습니다.
+        for pos in self._system_state.active_positions:
+            if pos.symbol == symbol:
+                return pos
+        return None
+
     async def set_initial_equity(self, equity: float):
         """하루 시작 시점의 총 자산을 설정합니다."""
         async with self._lock:
@@ -93,14 +103,10 @@ class StateStore:
     # --- Public Setters (atomic operations) ---
 
     async def update_wallet_balance(self, bybit_client: "BybitClient"):
-        """
-        [수정됨] Bybit에서 지갑 잔고를 가져와 시스템 상태를 업데이트합니다.
-        API 응답(dict)을 `Position` 객체로 변환하여 저장합니다.
-        """
+        """Bybit에서 지갑 잔고를 가져와 시스템 상태를 업데이트합니다."""
         try:
             balance_data = await bybit_client.get_wallet_balance()
             if not balance_data:
-                logger.warning("Received empty balance data.")
                 return
 
             async with self._lock:
@@ -112,17 +118,14 @@ class StateStore:
                     pnl = self._system_state.total_equity - self._initial_total_equity
                     self._system_state.pnl_day = pnl
                     self._system_state.realized_pnl = pnl
-                    if self._initial_total_equity > 0:
-                        pnl_pct = (pnl / self._initial_total_equity) * 100
-                        self._system_state.pnl_day_pct = pnl_pct
-                    else:
-                        # 시작 자산이 0이면 수익률도 0
-                        self._system_state.pnl_day_pct = 0.0
+                    self._system_state.pnl_day_pct = (
+                                                                 pnl / self._initial_total_equity) * 100 if self._initial_total_equity else 0.0
+                else:
+                    self._system_state.pnl_day, self._system_state.realized_pnl, self._system_state.pnl_day_pct = 0.0, 0.0, 0.0
 
                 coin_balances_data = balance_data.get('coin', [])
                 self._balances.clear()
 
-                # --- [핵심 수정 지점] ---
                 new_active_positions: List[Position] = []
                 held_symbols_set = set()
 
@@ -135,12 +138,16 @@ class StateStore:
                             symbol = f"{balance.coin}USDT"
                             held_symbols_set.add(symbol)
 
-                            # API 응답(dict)으로부터 Position 객체 생성
+                            existing_pos = self.get_position(symbol)
+
                             position_obj = Position(
                                 symbol=symbol,
                                 quantity=balance.wallet_balance,
-                                average_price=float(coin_dict.get('avgPrice', 0) or 0)
-                                # entry_price 등은 router에서 매수 시점에 기록되므로 여기서는 기본값 사용
+                                average_price=float(coin_dict.get('avgPrice', 0) or 0),
+                                entry_price=existing_pos.entry_price if existing_pos else 0,
+                                entry_timestamp=existing_pos.entry_timestamp if existing_pos else time.time(),
+                                highest_price_since_entry=existing_pos.highest_price_since_entry if existing_pos else 0,
+                                last_update_timestamp=time.time()
                             )
                             new_active_positions.append(position_obj)
 
@@ -148,9 +155,7 @@ class StateStore:
                         logger.warning(f"Failed to parse coin balance data: {coin_dict}. Error: {e}")
 
                 self._system_state.held_symbols = sorted(list(held_symbols_set))
-                # 변환된 Position 객체 리스트를 상태에 할당
                 self._system_state.active_positions = new_active_positions
-                # --- [수정 완료] ---
 
             logger.info(
                 f"Wallet balance updated. Equity: {self._system_state.total_equity:.2f}, PnL Day: {self._system_state.pnl_day:.2f}, Coins: {len(self._balances)}")
@@ -184,7 +189,6 @@ class StateStore:
     async def add_trade(self, trade_data: dict):
         async with self._lock:
             try:
-                # API 응답을 Order 모델로 파싱하여 일관성 유지
                 trade = Order(**trade_data)
                 self._recent_trades_deque.appendleft(trade.model_dump())
                 logger.info(f"Trade history updated with order {trade.order_id}")
@@ -202,57 +206,33 @@ class StateStore:
             self._trend_summary_deque.appendleft(trend_event)
         await self._update_state()
 
-    # ... (파일의 나머지 부분은 그대로 유지) ...
-    # update_wallet_balance_loop, update_realized_pnl, update_order_history 등
-    # 기존에 있던 다른 루프 및 메서드들은 그대로 유지합니다.
-
+    # ... 이하 루프 메서드들은 그대로 유지 ...
     async def update_wallet_balance_loop(self, bybit_client: "BybitClient", interval_seconds: int = 5):
-        """주기적으로 지갑 잔고를 업데이트하는 백그라운드 루프"""
         logger.info(f"Starting wallet balance update loop with {interval_seconds}s interval.")
         while True:
             try:
                 await self.update_wallet_balance(bybit_client)
                 await asyncio.sleep(interval_seconds)
             except asyncio.CancelledError:
-                logger.info("Wallet balance update loop cancelled.")
                 break
             except Exception as e:
                 logger.error(f"Error in wallet balance update loop: {e}", exc_info=True)
                 await asyncio.sleep(interval_seconds)
 
-    async def update_order_history(self, bybit_client: "BybitClient"):
-        """Bybit에서 주문 내역을 가져와 시스템 상태를 업데이트합니다."""
-        try:
-            order_history_data = await bybit_client.get_order_history(category="spot")
-
-            processed_orders = []
-            for data in order_history_data:
-                try:
-                    order = Order(**data)
-                    processed_orders.append(order)
-                except Exception as e:
-                    logger.warning(f"Failed to parse order history item: {data}. Error: {e}")
-
-            async with self._lock:
-                self._system_state.order_history = [o.model_dump() for o in processed_orders]
-            # logger.debug(f"Order history updated. Total orders: {len(self._system_state.order_history)}")
-        except Exception as e:
-            logger.error(f"Failed to update order history: {e}", exc_info=True)
-        await self._update_state()
-
     async def update_order_history_loop(self, bybit_client: "BybitClient", interval_seconds: int = 60):
-        """주기적으로 주문 내역을 업데이트하는 백그라운드 루프"""
         logger.info(f"Starting order history update loop with {interval_seconds}s interval.")
         while True:
             try:
-                await self.update_order_history(bybit_client)
-                await asyncio.sleep(interval_seconds)
+                # 주문 내역 업데이트 로직
+                order_history_data = await bybit_client.get_order_history(category="spot")
+                processed_orders = [Order(**data).model_dump() for data in order_history_data]
+                async with self._lock:
+                    self._system_state.order_history = processed_orders
             except asyncio.CancelledError:
-                logger.info("Order history update loop cancelled.")
                 break
             except Exception as e:
                 logger.error(f"Error in order history update loop: {e}", exc_info=True)
-                await asyncio.sleep(interval_seconds)
+            await asyncio.sleep(interval_seconds)
 
 
 # 전역 상태 저장소 인스턴스 생성

@@ -4,8 +4,8 @@
 #
 #   **핵심 변경사항:**
 #   - `_evaluate_signal` 함수에서 존재하지 않는 `balance.usd_value` 속성 접근 오류를 수정했습니다.
-#   - 자산의 USD 가치를 현재 가격을 기준으로 직접 계산하여, 최소 판매 금액을 정확히
-#     체크하도록 로직을 변경했습니다.
+#   - 자산의 USD 가치를 현재 가격을 기준으로 직접 계산하여, 최소 판매 금액 및
+#     먼지 자산(dust) 여부를 정확히 체크하도록 로직을 변경했습니다.
 #
 #
 import asyncio
@@ -15,7 +15,6 @@ from typing import Dict, Optional
 
 from loguru import logger
 
-from app.config import settings
 from app.exchange.bybit_client import BybitClient
 from app.risk.engine import RiskEngine
 from app.state.store import state_store
@@ -37,7 +36,7 @@ class StrategyRouter:
         self._signal_queue: asyncio.Queue[Signal] = asyncio.Queue()
 
         self.trend_aggregator = trend_aggregator
-        # self.trend_aggregator.set_signal_queue(self._signal_queue) # 필요시 활성화
+        self.trend_aggregator.set_signal_queue(self._signal_queue)
 
         self.scalping_generator = ScalpingSignalGenerator(
             signal_queue=self._signal_queue,
@@ -125,16 +124,13 @@ class StrategyRouter:
             try:
                 await asyncio.sleep(2)
                 active_positions = state_store.get_system_state().active_positions
-                if not active_positions:
-                    continue
+                if not active_positions: continue
 
                 config = self.risk_engine.get_config()
                 for position in active_positions:
-                    if not isinstance(position, Position): continue  # 안전장치
-
+                    # state_store에서 오는 데이터가 Position 객체임을 신뢰. 필요시 타입 체크 추가.
                     orderbook = state_store.get_orderbook(position.symbol)
-                    if not (orderbook and orderbook.get('b') and orderbook['b']):
-                        continue
+                    if not (orderbook and orderbook.get('b') and orderbook['b']): continue
 
                     current_price = float(orderbook['b'][0][0])
                     entry_price = position.entry_price
@@ -150,6 +146,7 @@ class StrategyRouter:
                     elif time.time() - position.entry_timestamp > config.max_holding_time_seconds:
                         self._create_exit_signal(position,
                                                  f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
+
             except asyncio.CancelledError:
                 break
             except Exception as e:
@@ -158,13 +155,8 @@ class StrategyRouter:
     def _create_exit_signal(self, position: Position, reason: str):
         """모니터링에 의해 발견된 청산 신호를 중앙 큐에 넣습니다."""
         logger.info(f"[EXIT SIGNAL CREATED] Symbol: {position.symbol}, Reason: {reason}")
-        signal = Signal(
-            symbol=position.symbol,
-            side=Side.SELL,
-            price=position.average_price,
-            reason=reason,
-            signal_type="exit_monitor"
-        )
+        signal = Signal(symbol=position.symbol, side=Side.SELL, price=position.average_price, reason=reason,
+                        signal_type="exit_monitor")
         self._signal_queue.put_nowait(signal)
 
     async def _evaluate_signal(self, signal: Signal):
@@ -173,20 +165,22 @@ class StrategyRouter:
         if self._is_in_cooldown(symbol) and signal.signal_type != "exit_monitor":
             return
 
+        # --- [오류 수정] ---
+        # USD 가치 계산을 위한 현재 가격 정보부터 가져옵니다.
+        orderbook = state_store.get_orderbook(symbol)
+        if not (orderbook and orderbook.get('b') and orderbook['b']):
+            logger.warning(f"Cannot evaluate signal for {symbol}, no orderbook data to get current price.")
+            return
+        current_price = float(orderbook['b'][0][0])
+        # --- [수정 완료] ---
+
         if signal.side == Side.SELL:
             base_currency = symbol.replace("USDT", "")
             balance = state_store.get_balance(base_currency)
 
             if balance and balance.wallet_balance > 0:
-                # [오류 수정] USD 가치를 직접 계산하여 먼지(dust) 판매 시도 방지
-                orderbook = state_store.get_orderbook(symbol)
-                if not (orderbook and orderbook.get('b') and orderbook['b']):
-                    logger.warning(f"Cannot calculate asset value for {symbol}, no orderbook data.")
-                    return
-
-                current_price = float(orderbook['b'][0][0])
                 asset_value_usd = balance.wallet_balance * current_price
-                MIN_SELL_VALUE_USD = 5.0  # 최소 판매 금액 (5달러)
+                MIN_SELL_VALUE_USD = 5.0
 
                 if asset_value_usd < MIN_SELL_VALUE_USD:
                     logger.debug(
@@ -197,6 +191,23 @@ class StrategyRouter:
                 await self._execute_sell_trade(signal, balance.wallet_balance)
 
         elif signal.side == Side.BUY:
+            base_currency = symbol.replace("USDT", "")
+            balance = state_store.get_balance(base_currency)
+
+            # 이미 자산을 보유하고 있는지 확인
+            if balance and balance.wallet_balance > 0:
+                asset_value_usd = balance.wallet_balance * current_price
+                DUST_THRESHOLD_USD = 10.0
+                if asset_value_usd < DUST_THRESHOLD_USD:
+                    logger.info(f"[EVALUATION] Topping up dust asset {symbol} (value: ${asset_value_usd:.2f}).")
+                    # 먼지 자산 추가 매수 로직으로 바로 진행
+                else:
+                    # 이미 충분한 양의 자산을 보유하고 있으면 추가 매수 안함
+                    logger.debug(
+                        f"Ignoring BUY signal for {symbol}. Asset already held with sufficient value (${asset_value_usd:.2f}).")
+                    return
+
+            # 리스크 엔진을 통해 최종 거래 가능 여부와 규모를 결정
             is_allowed, reason = self.risk_engine.is_trade_allowed(symbol, Side.BUY)
             if is_allowed:
                 logger.info(f"[EVALUATION] BUY signal for {symbol} approved by RiskEngine.")
@@ -213,7 +224,6 @@ class StrategyRouter:
 
     async def _execute_buy_trade(self, signal: Signal):
         """현물 매수 주문을 실행하고 거래 잠금을 설정합니다."""
-        order_id = None
         try:
             notional_size = self.risk_engine.calculate_notional_size(signal.symbol)
             if notional_size <= 0: return
@@ -222,16 +232,13 @@ class StrategyRouter:
             self._pending_symbol = signal.symbol
             logger.critical(f"LOCKING TRADES: Submitting BUY order for {signal.symbol}.")
 
-            order_result = await self.bybit_client.place_market_order(
-                symbol=signal.symbol, side=Side.BUY, qty=0, notional=notional_size
-            )
+            order_result = await self.bybit_client.place_market_order(symbol=signal.symbol, side=Side.BUY, qty=0,
+                                                                      notional=notional_size)
 
             if order_result and order_result.get('orderId'):
-                order_id = order_result['orderId']
                 logger.success(f"SPOT BUY order submitted for {signal.symbol}: {order_result}")
                 self._last_trade_times[signal.symbol] = datetime.utcnow()
 
-                # 주문 성공 후, 포지션 정보 업데이트
                 await asyncio.sleep(1.5)
                 position = state_store.get_position(signal.symbol)
                 if position:
@@ -239,6 +246,7 @@ class StrategyRouter:
                     position.entry_timestamp = time.time()
                     position.highest_price_since_entry = position.average_price
 
+                asyncio.create_task(self._fetch_and_record_trade(signal.symbol, order_result['orderId']))
                 asyncio.create_task(self._unlock_after_delay(5))
             else:
                 logger.error(f"SPOT BUY order submission failed for {signal.symbol}. Result: {order_result}")
@@ -255,13 +263,13 @@ class StrategyRouter:
             self._pending_symbol = signal.symbol
             logger.critical(f"LOCKING TRADES: Submitting SELL order for {signal.symbol}.")
 
-            order_result = await self.bybit_client.place_market_order(
-                symbol=signal.symbol, side=Side.SELL, qty=qty_to_sell, notional=0
-            )
+            order_result = await self.bybit_client.place_market_order(symbol=signal.symbol, side=Side.SELL,
+                                                                      qty=qty_to_sell, notional=0)
 
             if order_result and order_result.get('orderId'):
                 logger.success(f"SPOT SELL order submitted for {signal.symbol}: {order_result}")
                 self._last_trade_times[signal.symbol] = datetime.utcnow()
+                asyncio.create_task(self._fetch_and_record_trade(signal.symbol, order_result['orderId']))
                 asyncio.create_task(self._unlock_after_delay(5))
             else:
                 logger.error(f"SPOT SELL order submission failed for {signal.symbol}. Result: {order_result}")
@@ -270,6 +278,16 @@ class StrategyRouter:
         except Exception as e:
             logger.error(f"Failed to execute SELL trade for {signal.symbol}: {e}", exc_info=True)
             await self._unlock_trade()
+
+    async def _fetch_and_record_trade(self, symbol: str, order_id: str):
+        """주문 ID를 사용하여 거래 내역을 조회하고 저장합니다."""
+        await asyncio.sleep(1.5)
+        try:
+            history = await self.bybit_client.get_order_history(symbol=symbol, order_id=order_id)
+            if history:
+                await state_store.add_trade(history[0])
+        except Exception as e:
+            logger.error(f"Error fetching trade history for order {order_id}: {e}")
 
     async def _unlock_trade(self):
         """거래 잠금을 해제합니다."""
