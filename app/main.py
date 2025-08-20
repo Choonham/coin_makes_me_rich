@@ -88,19 +88,19 @@ async def lifespan(app: FastAPI):
         api_secret=settings.BYBIT_API_SECRET,
         testnet=settings.BYBIT_TESTNET
     )
-    trend_aggregator = TrendAggregator()
+    # trend_aggregator = TrendAggregator() # 뉴스/소셜 미디어 기반 트렌드 분석 비활성화
     from app.risk.engine import RiskEngine
     risk_engine = RiskEngine(bybit_client=bybit_client)
     await risk_engine.load_instrument_info()
     strategy_router = StrategyRouter(
         bybit_client=bybit_client, 
-        trend_aggregator=trend_aggregator, 
+        trend_aggregator=None, # 비활성화
         risk_engine=risk_engine
     )
     ws_manager = WebSocketManager()
 
     app.state.bybit_client = bybit_client
-    app.state.trend_aggregator = trend_aggregator
+    # app.state.trend_aggregator = trend_aggregator # 비활성화
     app.state.strategy_router = strategy_router
     app.state.ws_manager = ws_manager
 
@@ -111,7 +111,7 @@ async def lifespan(app: FastAPI):
 
     # 백그라운드 태스크 시작
     app.state.bybit_ws_task = asyncio.create_task(bybit_client.run_websockets())
-    app.state.trend_task = asyncio.create_task(trend_aggregator.run_connectors())
+    # app.state.trend_task = asyncio.create_task(trend_aggregator.run_connectors()) # 비활성화
     app.state.ws_broadcast_task = asyncio.create_task(ws_manager.broadcast_loop())
     app.state.wallet_balance_task = asyncio.create_task(state_store.update_wallet_balance_loop(bybit_client))
     app.state.order_history_task = asyncio.create_task(state_store.update_order_history_loop(bybit_client))

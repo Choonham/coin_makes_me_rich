@@ -18,7 +18,7 @@ from loguru import logger
 from app.exchange.bybit_client import BybitClient
 from app.risk.engine import RiskEngine
 from app.state.store import state_store
-from app.strategy.scalping import ScalpingSignalGenerator
+from app.strategy.scalping import SignalGenerator
 from app.trend.aggregator import TrendAggregator
 from app.utils.typing import Signal, Side
 from app.state.models import Position
@@ -29,22 +29,23 @@ class StrategyRouter:
     거래 신호를 라우팅하고 리스크를 검증하며 주문을 실행하는 핵심 엔진. (이벤트 기반)
     """
 
-    def __init__(self, bybit_client: BybitClient, trend_aggregator: TrendAggregator, risk_engine: RiskEngine):
+    def __init__(self, bybit_client: BybitClient, trend_aggregator: Optional[TrendAggregator], risk_engine: RiskEngine):
         self.bybit_client = bybit_client
         self.risk_engine = risk_engine
 
         self._signal_queue: asyncio.Queue[Signal] = asyncio.Queue()
 
         self.trend_aggregator = trend_aggregator
-        self.trend_aggregator.set_signal_queue(self._signal_queue)
+        if self.trend_aggregator:
+            self.trend_aggregator.set_signal_queue(self._signal_queue)
 
-        self.scalping_generator = ScalpingSignalGenerator(
+        self.signal_generator = SignalGenerator(
             signal_queue=self._signal_queue,
-            imbalance_threshold=0.52
+            bybit_client=self.bybit_client
         )
 
         self._strategy_task: Optional[asyncio.Task] = None
-        self._scalping_loop_task: Optional[asyncio.Task] = None
+        self._signal_gen_task: Optional[asyncio.Task] = None
         self._position_monitor_task: Optional[asyncio.Task] = None
 
         self._last_trade_times: Dict[str, datetime] = {}
@@ -56,7 +57,7 @@ class StrategyRouter:
         logger.info("Event-Driven StrategyRouter initialized with Position Monitor.")
 
     async def start(self):
-        """전략 실행, 스캘핑, 포지션 모니터링 루프를 시작합니다."""
+        """전략 실행, 신호 생성, 포지션 모니터링 루프를 시작합니다."""
         if self.is_running():
             logger.warning("Strategy is already running.")
             return
@@ -66,9 +67,9 @@ class StrategyRouter:
 
         await state_store.set_status("running")
         self._strategy_task = asyncio.create_task(self._strategy_loop())
-        self._scalping_loop_task = asyncio.create_task(self.scalping_generator.run_loop())
+        self._signal_gen_task = asyncio.create_task(self.signal_generator.run_loop())
         self._position_monitor_task = asyncio.create_task(self._position_monitor_loop())
-        logger.info("StrategyRouter, ScalpingGenerator, and PositionMonitor loops started.")
+        logger.info("StrategyRouter, SignalGenerator, and PositionMonitor loops started.")
 
     async def stop(self):
         """모든 관련 루프를 중지합니다."""
@@ -76,15 +77,15 @@ class StrategyRouter:
             logger.warning("Strategy is not running.")
             return
 
-        tasks = [self._strategy_task, self._scalping_loop_task, self._position_monitor_task]
+        tasks = [self._strategy_task, self._signal_gen_task, self._position_monitor_task]
         for task in tasks:
             if task:
                 task.cancel()
         await asyncio.gather(*[t for t in tasks if t], return_exceptions=True)
 
-        self._strategy_task, self._scalping_loop_task, self._position_monitor_task = None, None, None
+        self._strategy_task, self._signal_gen_task, self._position_monitor_task = None, None, None
         await state_store.set_status("stopped")
-        logger.info("StrategyRouter, ScalpingGenerator, and PositionMonitor loops stopped.")
+        logger.info("StrategyRouter, SignalGenerator, and PositionMonitor loops stopped.")
 
     def is_running(self) -> bool:
         """전략이 현재 실행 중인지 확인합니다."""
@@ -118,34 +119,64 @@ class StrategyRouter:
                 await asyncio.sleep(5)
 
     async def _position_monitor_loop(self):
-        """주기적으로 활성 포지션을 확인하여 자동 청산 신호를 생성합니다."""
+        """
+        주기적으로 활성 포지션을 확인하여 자동 청산 신호를 생성합니다.
+        (익절/손절 + 새로운 TA 기반 매도 조건 추가)
+        """
         logger.info("Position monitor loop started.")
         while True:
             try:
-                await asyncio.sleep(2)
+                await asyncio.sleep(3) # TA 계산을 위해 약간의 여유를 둠
                 active_positions = state_store.get_system_state().active_positions
-                if not active_positions: continue
+                if not active_positions:
+                    continue
 
                 config = self.risk_engine.get_config()
                 for position in active_positions:
-                    # state_store에서 오는 데이터가 Position 객체임을 신뢰. 필요시 타입 체크 추가.
+                    # --- 1. 익절/손절/타임아웃 확인 (기존 로직) ---
                     orderbook = state_store.get_orderbook(position.symbol)
-                    if not (orderbook and orderbook.get('b') and orderbook['b']): continue
-
+                    if not (orderbook and orderbook.get('b') and orderbook['b']):
+                        continue
+                    
                     current_price = float(orderbook['b'][0][0])
                     entry_price = position.entry_price
                     if entry_price == 0: continue
 
                     pnl_bps = ((current_price / entry_price) - 1) * 10000
 
-                    # 익절/손절/타임아웃 로직
                     if pnl_bps >= config.default_tp_bps:
                         self._create_exit_signal(position, f"Take Profit at {pnl_bps:.1f} BPS")
+                        continue # 신호 생성 후 다음 포지션으로
                     elif pnl_bps <= -config.default_sl_bps:
                         self._create_exit_signal(position, f"Stop Loss at {pnl_bps:.1f} BPS")
+                        continue
                     elif time.time() - position.entry_timestamp > config.max_holding_time_seconds:
-                        self._create_exit_signal(position,
-                                                 f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
+                        self._create_exit_signal(position, f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
+                        continue
+
+                    # --- 2. TA 기반 매도 조건 확인 (새로운 로직) ---
+                    try:
+                        kline_data = await self.bybit_client.get_kline(symbol=position.symbol, interval="60", limit=100)
+                        if not kline_data: continue
+
+                        df = calculate_indicators(kline_data, self.signal_generator.short_ma, self.signal_generator.long_ma)
+                        if df.empty or len(df) < 2: continue
+
+                        latest = df.iloc[-1]
+                        previous = df.iloc[-2]
+
+                        # 매도 조건: RSI > 70 또는 데드 크로스
+                        rsi_condition = latest['RSI'] > 70
+                        dead_cross_condition = (previous[f'SMA_{self.signal_generator.short_ma}'] >= previous[f'SMA_{self.signal_generator.long_ma}']) and \
+                                                 (latest[f'SMA_{self.signal_generator.short_ma}'] < latest[f'SMA_{self.signal_generator.long_ma}'])
+
+                        if rsi_condition:
+                            self._create_exit_signal(position, f"RSI > 70 ({latest['RSI']:.1f})")
+                        elif dead_cross_condition:
+                            self._create_exit_signal(position, "Dead Cross detected")
+
+                    except Exception as e:
+                        logger.error(f"Error checking TA exit conditions for {position.symbol}: {e}")
 
             except asyncio.CancelledError:
                 break

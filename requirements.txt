@@ -37,6 +37,10 @@ prometheus-fastapi-instrumentator
 vaderSentiment # For sentiment analysis
 PyYAML # For loading asset files
 
+# --- Technical Analysis ---
+pandas
+pandas-ta
+
 # --- Event Queue (Optional) ---
 # aiokafka
 # redis

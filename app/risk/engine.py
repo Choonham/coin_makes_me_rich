@@ -67,15 +67,15 @@ class RiskEngine:
             raise
 
     def _load_config_from_settings(self) -> RiskConfig:
-        """`settings` 객체로부터 리스크 설정을 로드합니다."""
+        """`settings` 객체로부터 리스크 설정을 로드하고, 새 전략에 맞게 TP/SL을 조정합니다."""
         return RiskConfig(
             day_loss_limit_usd=settings.DAY_LOSS_LIMIT_USD,
             day_profit_target_pct=settings.DAY_PROFIT_TARGET_PCT,
-            risk_per_trade=settings.RISK_PER_TRADE,
+            risk_per_trade=settings.RISK_PER_TRADE, # .env 값을 사용 (필요시 0.1로 직접 설정 가능)
             max_active_symbols=settings.MAX_ACTIVE_SYMBOLS,
             max_slippage_bps=settings.MAX_SLIPPAGE_BPS,
-            default_tp_bps=settings.DEFAULT_TP_BPS,
-            default_sl_bps=settings.DEFAULT_SL_BPS,
+            default_tp_bps=500,  # 익절: +5% (500 BPS)
+            default_sl_bps=200,  # 손절: -2% (200 BPS)
             trailing_sl_bps=settings.TRAILING_SL_BPS,
             max_holding_time_seconds=settings.MAX_HOLDING_TIME_SECONDS
         )
@@ -146,26 +146,27 @@ class RiskEngine:
 
     def calculate_notional_size(self, symbol: str) -> float:
         """
-        거래당 리스크 설정에 따라 이번 거래에 사용할 금액(USDT)을 계산합니다.
+        [전략 변경] 전체 자산의 10%를 거래 금액으로 계산합니다.
 
         :return: 거래에 사용할 USDT 금액
         """
         state = state_store.get_system_state()
         available_usdt = state.available_usdt_balance
+        total_equity = state.total_equity
 
         if available_usdt < 20:  # 최소 주문 금액 등을 고려한 버퍼
             logger.warning(f"Not enough USDT to trade. Available: {available_usdt:.2f}")
             return 0.0
 
-        # 거래당 리스크 비율에 따라 투자 금액 계산
-        trade_value = state.total_equity * self.config.risk_per_trade
+        # 전체 자산의 10%를 거래 금액으로 설정
+        trade_value = total_equity * 0.10
 
         # 사용 가능한 USDT 잔고를 초과하지 않도록 조정
         notional_size = min(trade_value, available_usdt)
 
         MIN_ORDER_USDT = 10.0  # Bybit 현물 최소 주문 금액 (보수적으로 설정)
         if notional_size < MIN_ORDER_USDT:
-            # 계산된 금액이 너무 작으면, 가능한 경우 최소 주문 금액으로 거래
-            return MIN_ORDER_USDT if available_usdt >= MIN_ORDER_USDT else 0.0
+            logger.warning(f"Calculated trade size (${notional_size:.2f}) is below minimum order size. Skipping trade.")
+            return 0.0
 
         return round(notional_size, 2)
