@@ -112,7 +112,11 @@ async def update_risk_config(
       "max_slippage_bps": 15,
       "default_tp_bps": 60,
       "default_sl_bps": 30,
-      "trailing_sl_bps": 40
+      "trailing_sl_bps": 40,
+       "default_tp_bps": 60,
+      "default_sl_bps": 30,
+      "trailing_sl_bps": 20,
+      "max_holding_time_seconds": 300
     }
     ```
     

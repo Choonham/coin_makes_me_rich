@@ -26,9 +26,13 @@ from typing import Optional
 from app.state.store import state_store
 from app.utils.typing import Signal, Side
 
+
 class ScalpingSignalGenerator:
     """
     오더북 데이터를 기반으로 스캘핑 신호를 생성하여 중앙 큐로 보냅니다.
+    - Sell 신호 로직 개선
+    - 10달러 미만 '먼지' 자산 보유 예외 처리
+    - 매수/매도 신호 생성 로직 분리 (버그 수정)
     """
     def __init__(self, signal_queue: asyncio.Queue[Signal], imbalance_threshold: float = 0.6, depth: int = 5):
         """
@@ -39,7 +43,7 @@ class ScalpingSignalGenerator:
             raise ValueError("imbalance_threshold must be between 0.5 and 1.0")
         if not depth > 0:
             raise ValueError("depth must be a positive integer")
-            
+
         self.signal_queue = signal_queue
         self.imbalance_threshold = imbalance_threshold
         self.depth = depth
@@ -52,12 +56,10 @@ class ScalpingSignalGenerator:
         logger.info(f"Starting scalping signal generation loop with {interval_seconds}s interval.")
         while True:
             try:
-                # state_store에서 universe를 직접 가져오는 대신 risk_engine을 통해 가져오도록 수정 필요
-                # 임시로 state_store 사용
                 universe = state_store.get_universe()
                 for symbol in universe:
                     self.check_and_send_signal(symbol)
-                
+
                 await asyncio.sleep(interval_seconds)
             except asyncio.CancelledError:
                 logger.info("Scalping signal loop cancelled.")
@@ -68,26 +70,43 @@ class ScalpingSignalGenerator:
 
     def check_and_send_signal(self, symbol: str):
         """
-        지정된 심볼에 대한 신호를 확인하고, 신호가 있으면 큐로 보냅니다.
+        지정된 심볼의 자산 가치를 평가하여 신호를 확인하고 큐로 보냅니다.
+        10달러 미만의 자산은 보유하지 않은 것으로 간주합니다.
         """
-        # 1. 보유 자산 청산 신호 확인 (가장 먼저 처리)
-        # 보유 자산이 있을 때만 exit signal을 체크하고, 신호가 있으면 전송 후 즉시 종료
         base_currency = symbol.replace("USDT", "")
-        if state_store.get_balance(base_currency):
+        balance_info = state_store.get_balance(base_currency)
+        is_asset_held = False
+        MIN_ASSET_VALUE_USD = 10.0 # 자산 보유로 판단할 최소 USD 가치
+
+        if balance_info and balance_info.wallet_balance > 0:
+            orderbook = state_store.get_orderbook(symbol)
+            if orderbook and orderbook.get('b') and len(orderbook['b']) > 0:
+                try:
+                    current_price = float(orderbook['b'][0][0])
+                    asset_value_usd = balance_info.wallet_balance * current_price
+
+                    if asset_value_usd >= MIN_ASSET_VALUE_USD:
+                        is_asset_held = True
+                    else:
+                        logger.trace(f"Ignoring dust asset for {symbol}. Value: ${asset_value_usd:.4f}")
+                except (ValueError, IndexError) as e:
+                    logger.warning(f"Could not calculate asset value for {symbol} due to orderbook data issue: {e}")
+                    is_asset_held = True # 안전을 위해 보유한 것으로 간주
+
+        if is_asset_held:
+            # 자산을 의미있게 보유 중일 때는 '매도 신호'만 확인
             exit_signal = self._check_for_exit_signal(symbol)
             if exit_signal:
                 self.signal_queue.put_nowait(exit_signal)
-                return
-
-        # 2. 신규 진입(매수) 신호 확인
-        # 보유 자산이 없을 때만 진입 신호를 체크
-        buy_signal = self._check_for_buy_signal(symbol)
-        if buy_signal:
-            self.signal_queue.put_nowait(buy_signal)
+        else:
+            # 자산을 보유하지 않았거나, 10달러 미만일 때는 '매수 신호'만 확인
+            buy_signal = self._check_for_buy_signal(symbol)
+            if buy_signal:
+                self.signal_queue.put_nowait(buy_signal)
 
     def _check_for_buy_signal(self, symbol: str) -> Optional[Signal]:
         """
-        진입(매수) 신호만 확인합니다.
+        진입(매수) 신호를 확인합니다.
         """
         orderbook = state_store.get_orderbook(symbol)
         if not orderbook or not orderbook.get('b') or not orderbook.get('a'):
@@ -120,14 +139,8 @@ class ScalpingSignalGenerator:
 
     def _check_for_exit_signal(self, symbol: str) -> Optional[Signal]:
         """
-        보유 자산 청산을 위한 신호를 확인합니다. (로직은 동일, 호출 위치 변경)
+        보유 자산 청산을 위한 신호를 확인합니다. (매도 조건 완화)
         """
-        base_currency = symbol.replace("USDT", "")
-        balance = state_store.get_balance(base_currency)
-        
-        if not balance or balance.wallet_balance <= 0:
-            return None
-
         orderbook = state_store.get_orderbook(symbol)
         if not orderbook or not orderbook.get('b') or not orderbook.get('a'):
             return None
@@ -146,11 +159,12 @@ class ScalpingSignalGenerator:
         bid_pressure_ratio = total_bid_size / total_liquidity
         best_bid_price = float(bids[0][0])
 
-        if bid_pressure_ratio < (1 - self.imbalance_threshold):
-            logger.info(f"[EXIT SIGNAL] Reversal for owned {symbol}. Creating SELL signal.")
+        # [수정됨] 매수 압력이 50% 미만으로 떨어지면(중립화되면) 매도 신호 생성
+        if bid_pressure_ratio < 0.5:
+            logger.info(f"[EXIT SIGNAL] Pressure neutralized for {symbol}. Creating SELL signal. Ratio: {bid_pressure_ratio:.2f}")
             return Signal(
                 symbol=symbol, side=Side.SELL, price=best_bid_price,
-                reason="Orderbook imbalance reversal (strong ask pressure)",
+                reason=f"Orderbook pressure neutralized (bid ratio: {bid_pressure_ratio:.2f})",
                 signal_type="scalping_exit"
             )
         return None
