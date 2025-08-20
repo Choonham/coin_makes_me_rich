@@ -92,6 +92,7 @@ class AppSettings(BaseSettings):
     LOG_TO_FILE: bool = True
     LOG_FILE_PATH: str = str(PROJECT_ROOT / "logs/app.log")
     LOG_JSON_FORMAT: bool = False # JSON 형식으로 로그를 남길지 여부
+    MAX_HOLDING_TIME_SECONDS: int
 
 # 설정 객체 인스턴스 생성
 # 이 `settings` 객체를 다른 모듈에서 임포트하여 사용합니다.
