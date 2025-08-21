@@ -155,12 +155,12 @@ class BybitClient:
         """
         Bybit API v5의 지갑 잔고 엔드포인트를 호출하여 전체 응답을 반환합니다.
         """
+        print(params);
         # 이 함수는 API의 응답 딕셔너리 전체를 그대로 반환해야 합니다.
         return await self._request(
             endpoint="/v5/account/wallet-balance",
             method="GET",
-            params=params,
-            auth=True
+            params=params
         )
 
     async def get_closed_pnl(self, category: str = "spot", limit: int = 50) -> List[Dict]:

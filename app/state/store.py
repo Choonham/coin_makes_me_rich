@@ -159,12 +159,12 @@ class StateStore:
 
                     # 임시로 'walletBalance' 키를 추가하여 기존 모델과 호환되도록 처리
                     coin_dict_compatible = coin_dict.copy()
-                    coin_dict_compatible['walletBalance'] = coin_dict.get('equity', '0')
+                    coin_dict_compatible['wallet_balance'] = coin_dict.get('equity', '0')
 
                     balance = CoinBalance(**coin_dict_compatible)
                     self._balances[balance.coin] = balance
 
-                    if balance.coin != "USDT" and float(balance.walletBalance or 0) > 1e-9:
+                    if balance.coin != "USDT" and float(balance.wallet_balance or 0) > 1e-9:
                         symbol = f"{balance.coin}USDT"
                         held_symbols_set.add(symbol)
 
