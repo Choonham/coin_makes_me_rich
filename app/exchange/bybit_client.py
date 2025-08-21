@@ -340,9 +340,10 @@ class BybitClient:
         topic = data.get("topic", "")
         
         # 예: 오더북 데이터 처리
-        if topic.startswith("orderbook.50"): # 50-level orderbook
+        if topic.startswith("orderbook.50"):  # 50-level orderbook
             symbol = topic.split('.')[-1]
-            await state_store.update_orderbook(symbol, data['data'])
+            # data['data'] 대신 전체 data 객체를 전달하여 type, s, b, a 등의 정보를 모두 활용하도록 변경
+            await state_store.update_orderbook(symbol, data)
             # logger.debug(f"Updated orderbook for {symbol}")
 
         # 예: 개인 주문 업데이트 처리

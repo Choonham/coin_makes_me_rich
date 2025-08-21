@@ -193,7 +193,61 @@ class StateStore:
         await self._update_state()
 
     async def update_orderbook(self, symbol: str, data: Dict):
-        self._orderbooks[symbol] = data
+        """
+        [수정된 코드]
+        호가창 데이터를 스냅샷 또는 델타 업데이트로 처리합니다.
+        """
+        async with self._lock:
+            # 1. 메시지 타입 확인: 스냅샷 또는 델타
+            is_snapshot = data.get('type') == 'snapshot'
+
+            if is_snapshot:
+                # 스냅샷일 경우: 기존 데이터 덮어쓰기
+                self._orderbooks[symbol] = data['data']
+                logger.info(f"Orderbook snapshot received for {symbol}.")
+            else:
+                # 델타일 경우: 기존 데이터에 병합
+                current_book = self._orderbooks.get(symbol)
+                if current_book:
+                    self._merge_delta(current_book,  data['data'])
+                else:
+                    # 스냅샷을 받기 전에 델타가 오면 무시 (재연결 필요)
+                    logger.warning(f"Delta update for {symbol} received before snapshot. Ignoring.")
+
+
+    def _merge_delta(self, current_book: Dict, delta_data: Dict):
+        """
+        [새로운 헬퍼 함수]
+        기존 호가창에 델타 데이터를 병합합니다.
+        """
+        # 매수/매도 호가 모두 업데이트
+        for side in ['b', 'a']:
+            for price_level in delta_data.get(side, []):
+                price, quantity = price_level[0], price_level[1]
+
+                # 기존 데이터에서 해당 가격대 찾기
+                found = False
+                for i, existing_level in enumerate(current_book['data'].get(side, [])):
+                    if existing_level[0] == price:
+                        if quantity == '0':
+                            # 수량이 0이면 해당 가격대 삭제
+                            del current_book['data'][side][i]
+                        else:
+                            # 수량 업데이트
+                            current_book['data'][side][i][1] = quantity
+                        found = True
+                        break
+
+                if not found and quantity != '0':
+                    # 새로운 가격대 추가
+                    current_book['data'][side].append([price, quantity])
+
+        # 정렬하여 최신 상태 유지
+        current_book['data']['b'].sort(key=lambda x: float(x[0]), reverse=True)
+        current_book['data']['a'].sort(key=lambda x: float(x[0]))
+        current_book['u'] = delta_data.get('u')
+        current_book['seq'] = delta_data.get('seq')
+
 
     async def update_order(self, order_data: dict):
         async with self._lock:

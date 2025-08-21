@@ -200,7 +200,7 @@ class StrategyRouter:
         # --- [오류 수정] ---
         # USD 가치 계산을 위한 현재 가격 정보부터 가져옵니다.
         orderbook = state_store.get_orderbook(symbol)
-        if not (orderbook and orderbook.get('b') and orderbook['b']):
+        if not (orderbook and orderbook.get('b') or orderbook['b']):
             logger.warning(f"Cannot evaluate signal for {symbol}, no orderbook data to get current price.")
             return
         current_price = float(orderbook['b'][0][0])
