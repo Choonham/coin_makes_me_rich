@@ -36,26 +36,35 @@ class SignalGenerator:
     async def run_loop(self, interval_seconds: float = 5.0):
         """
         주기적으로 모든 거래 대상 심볼에 대해 신호 생성을 확인하는 루프.
+        (병렬 처리에서 순차 처리로 변경하여 안정성 강화)
         """
         logger.info(f"Starting TA signal generation loop with {interval_seconds}s interval.")
         while True:
             try:
                 universe = state_store.get_universe()
-                tasks = [self.check_and_send_signal(symbol) for symbol in universe]
-                await asyncio.gather(*tasks)
+                for symbol in universe:
+                    try:
+                        await self.check_and_send_signal(symbol)
+                    except Exception as e:
+                        # 개별 심볼 처리 중 발생하는 오류를 로깅하고 계속 진행
+                        logger.error(f"Error processing symbol {symbol} in TA signal loop: {e}", exc_info=True)
+
                 await asyncio.sleep(interval_seconds)
+
             except asyncio.CancelledError:
                 logger.info("TA signal loop cancelled.")
                 break
             except Exception as e:
-                logger.error(f"Error in TA signal loop: {e}", exc_info=True)
+                # 루프 자체의 심각한 오류 로깅
+                logger.error(f"Critical error in TA signal loop: {e}", exc_info=True)
                 await asyncio.sleep(15)
+
+
 
     async def check_and_send_signal(self, symbol: str):
         """
         특정 심볼에 대한 매수 신호 조건을 확인하고, 충족 시 신호를 큐로 보냅니다.
         """
-        # 이미 포지션을 보유하고 있다면 새로운 매수 신호를 생성하지 않음
         if state_store.get_position(symbol):
             return
 
@@ -66,15 +75,18 @@ class SignalGenerator:
     async def _check_for_buy_signal(self, symbol: str) -> Optional[Signal]:
         """
         RSI 및 골든 크로스 조건을 확인하여 매수 신호를 생성합니다.
+        (들여쓰기 및 데이터 접근 오류 수정)
         """
         try:
             # 1시간봉 기준 캔들 데이터 가져오기
             kline_data = await self.bybit_client.get_kline(symbol=symbol, interval="60", limit=100)
             if not kline_data or len(kline_data) < self.long_ma:
                 return None
-            
+
             df = calculate_indicators(kline_data, self.short_ma, self.long_ma)
-            if df.empty or len(df) < 2:
+            if df.empty or len(df) < 2 or 'RSI' not in df.columns or 'close' not in df.columns:
+                logger.warning(
+                    f"[{symbol}] DataFrame is empty or missing required columns after indicator calculation.")
                 return None
 
             latest = df.iloc[-1]
@@ -85,16 +97,32 @@ class SignalGenerator:
             golden_cross_condition = (previous[f'SMA_{self.short_ma}'] <= previous[f'SMA_{self.long_ma}']) and \
                                      (latest[f'SMA_{self.short_ma}'] > latest[f'SMA_{self.long_ma}'])
 
-            if rsi_condition and golden_cross_condition:
-                logger.success(f"[BUY SIGNAL] Conditions met for {symbol}. RSI: {latest['RSI']:.2f}, Golden Cross detected.")
+            # 두 조건 중 하나만 만족해도 신호를 발생시키도록 변경 (OR 조건 사용)
+            if rsi_condition or golden_cross_condition:
+                reason = ""
+                if rsi_condition:
+                    reason += f"RSI < 30 ({latest['RSI']:.1f})"
+                if golden_cross_condition:
+                    if reason: reason += " and "
+                    reason += "Golden Cross"
+
+                # RSI 값을 기반으로 신호 강도 계산 (0.0 ~ 1.0)
+                # RSI가 0에 가까울수록 강한 신호
+                strength = round(1.0 - (latest['RSI'] / 100.0), 2)
+
+                logger.success(f"[BUY SIGNAL] Conditions met for {symbol}. Reason: {reason}, Strength: {strength}")
                 return Signal(
                     symbol=symbol,
                     side=Side.BUY,
                     price=latest['close'],
-                    reason=f"RSI < 30 ({latest['RSI']:.1f}) and Golden Cross",
-                    signal_type="ta_buy"
+                    reason=reason,
+                    signal_type="scalping",  # "ta_buy"를 "scalping"으로 수정
+                    strength=strength
                 )
+        except KeyError as e:
+            logger.error(f"[{symbol}] KeyError when checking for buy signal. A required key is missing: {e}",
+                         exc_info=True)
         except Exception as e:
             logger.error(f"[{symbol}] Failed to check for buy signal: {e}", exc_info=True)
-        
+
         return None

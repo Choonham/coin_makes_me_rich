@@ -22,6 +22,7 @@ from app.strategy.scalping import SignalGenerator
 from app.trend.aggregator import TrendAggregator
 from app.utils.typing import Signal, Side
 from app.state.models import Position
+from app.strategy.technical_analysis import calculate_indicators
 
 
 class StrategyRouter:

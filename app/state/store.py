@@ -103,64 +103,96 @@ class StateStore:
     # --- Public Setters (atomic operations) ---
 
     async def update_wallet_balance(self, bybit_client: "BybitClient"):
-        """Bybit에서 지갑 잔고를 가져와 시스템 상태를 업데이트합니다."""
+        """Bybit에서 지갑 잔고를 가져와 시스템 상태를 업데이트합니다. (수정된 최종본)"""
         try:
             balance_data = await bybit_client.get_wallet_balance()
-            if not balance_data:
+            if not balance_data or 'coin' not in balance_data.get('list', [{}])[0]:
+                logger.warning("Wallet balance data is empty or malformed.")
                 return
 
-            async with self._lock:
-                self._system_state.total_equity = float(balance_data.get('totalEquity', 0.0))
-                self._system_state.available_balance = float(balance_data.get('totalAvailableBalance', 0.0))
-                self._system_state.unrealised_pnl = float(balance_data.get('totalUnrealisedPnl', 0.0))
+            account_info = balance_data['list'][0]
 
+            async with self._lock:
+                # --- 기본 지갑 정보 업데이트 ---
+                self._system_state.total_equity = float(account_info.get('totalEquity', 0.0))
+                self._system_state.available_balance = float(account_info.get('totalAvailableBalance', 0.0))
+                self._system_state.unrealised_pnl = float(account_info.get('totalUnrealisedPnl', 0.0))
+
+                # --- 일일 손익 계산 ---
                 if self._initial_total_equity > 0:
                     pnl = self._system_state.total_equity - self._initial_total_equity
                     self._system_state.pnl_day = pnl
-                    self._system_state.realized_pnl = pnl
                     self._system_state.pnl_day_pct = (
-                                                                 pnl / self._initial_total_equity) * 100 if self._initial_total_equity else 0.0
-                else:
-                    self._system_state.pnl_day, self._system_state.realized_pnl, self._system_state.pnl_day_pct = 0.0, 0.0, 0.0
+                                                                 pnl / self._initial_total_equity) * 100 if self._initial_total_equity > 0 else 0.0
 
-                coin_balances_data = balance_data.get('coin', [])
+                # --- 보유 코인 및 포지션 정보 업데이트 ---
+                coin_balances_data = account_info.get('coin', [])
                 self._balances.clear()
 
-                new_active_positions: List[Position] = []
+                new_active_positions: Dict[str, Position] = {}
                 held_symbols_set = set()
 
                 for coin_dict in coin_balances_data:
                     try:
+                        coin_name = coin_dict.get('coin')
+                        if not coin_name or coin_name == "USDT":
+                            continue
+
+                        wallet_balance = float(coin_dict.get('walletBalance', 0.0))
+                        if wallet_balance <= 1e-9:  # 먼지 수량 무시
+                            continue
+
+                        # CoinBalance 모델로 유효성 검사 및 데이터 변환
                         balance = CoinBalance(**coin_dict)
                         self._balances[balance.coin] = balance
 
-                        if balance.coin != "USDT" and balance.wallet_balance > 1e-9:
-                            symbol = f"{balance.coin}USDT"
-                            held_symbols_set.add(symbol)
+                        symbol = f"{balance.coin}USDT"
+                        if symbol not in self._universe:
+                            continue
 
-                            existing_pos = self.get_position(symbol)
+                        held_symbols_set.add(symbol)
 
-                            position_obj = Position(
+                        avg_price = float(balance.avg_price or 0)
+
+                        # 기존 포지션 정보를 가져옴
+                        existing_pos = self._system_state.active_positions.get(symbol)
+
+                        if existing_pos:
+                            # 기존 포지션이 있으면 최신 정보로 업데이트
+                            existing_pos.quantity = balance.wallet_balance
+                            existing_pos.average_price = avg_price
+                            existing_pos.last_update_timestamp = time.time()
+                            new_active_positions[symbol] = existing_pos
+                        else:
+                            # 기존 포지션이 없으면 새로 생성 (모든 필수 필드 포함)
+                            logger.info(f"Creating new position for existing asset: {symbol}")
+                            new_position = Position(
                                 symbol=symbol,
                                 quantity=balance.wallet_balance,
-                                average_price=float(coin_dict.get('avgPrice', 0) or 0),
-                                entry_price=existing_pos.entry_price if existing_pos else 0,
-                                entry_timestamp=existing_pos.entry_timestamp if existing_pos else time.time(),
-                                highest_price_since_entry=existing_pos.highest_price_since_entry if existing_pos else 0,
-                                last_update_timestamp=time.time()
+                                average_price=avg_price,
+                                entry_price=avg_price,  # 최초 생성 시점에는 진입가 = 평균가
+                                entry_timestamp=time.time(),
+                                highest_price_since_entry=avg_price
                             )
-                            new_active_positions.append(position_obj)
+                            new_active_positions[symbol] = new_position
+                            logger.warning(
+                                f"Initial entry_price for {symbol} set to avgPrice: {avg_price}"
+                            )
 
                     except Exception as e:
-                        logger.warning(f"Failed to parse coin balance data: {coin_dict}. Error: {e}")
+                        logger.error(f"Failed to parse coin balance data: {coin_dict}. Error: {e}", exc_info=True)
 
                 self._system_state.held_symbols = sorted(list(held_symbols_set))
                 self._system_state.active_positions = new_active_positions
 
             logger.info(
-                f"Wallet balance updated. Equity: {self._system_state.total_equity:.2f}, PnL Day: {self._system_state.pnl_day:.2f}, Coins: {len(self._balances)}")
+                f"Wallet balance updated. Equity: {self._system_state.total_equity:.2f}, "
+                f"PnL Day: {self._system_state.pnl_day:.2f}, "
+                f"Held Coins: {len(self._system_state.held_symbols)}"
+            )
         except Exception as e:
             logger.error(f"Failed to update wallet balance: {e}", exc_info=True)
+
         await self._update_state()
 
     async def set_status(self, status: str):
