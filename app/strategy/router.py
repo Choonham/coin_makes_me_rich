@@ -229,7 +229,7 @@ class StrategyRouter:
             # 이미 자산을 보유하고 있는지 확인
             if balance and balance.wallet_balance > 0:
                 asset_value_usd = balance.wallet_balance * current_price
-                DUST_THRESHOLD_USD = 10.0
+                DUST_THRESHOLD_USD = 1000
                 if asset_value_usd < DUST_THRESHOLD_USD:
                     logger.info(f"[EVALUATION] Topping up dust asset {symbol} (value: ${asset_value_usd:.2f}).")
                     # 먼지 자산 추가 매수 로직으로 바로 진행
@@ -293,7 +293,7 @@ class StrategyRouter:
                         # 새로운 Position 객체를 생성하여 active_positions에 추가
                         position = Position(
                             symbol=signal.symbol,
-                            quantity=float(history[0]['execQty']),
+                            quantity=float(history[0]['cumExecQty']),
                             average_price=actual_entry_price,
                             entry_price=actual_entry_price,
                             entry_timestamp=time.time(),

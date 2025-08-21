@@ -227,24 +227,24 @@ class StateStore:
 
                 # 기존 데이터에서 해당 가격대 찾기
                 found = False
-                for i, existing_level in enumerate(current_book['data'].get(side, [])):
+                for i, existing_level in enumerate(current_book.get(side, [])):
                     if existing_level[0] == price:
                         if quantity == '0':
                             # 수량이 0이면 해당 가격대 삭제
-                            del current_book['data'][side][i]
+                            del current_book[side][i]
                         else:
                             # 수량 업데이트
-                            current_book['data'][side][i][1] = quantity
+                            current_book[side][i][1] = quantity
                         found = True
                         break
 
                 if not found and quantity != '0':
                     # 새로운 가격대 추가
-                    current_book['data'][side].append([price, quantity])
+                    current_book[side].append([price, quantity])
 
         # 정렬하여 최신 상태 유지
-        current_book['data']['b'].sort(key=lambda x: float(x[0]), reverse=True)
-        current_book['data']['a'].sort(key=lambda x: float(x[0]))
+        current_book['b'].sort(key=lambda x: float(x[0]), reverse=True)
+        current_book['a'].sort(key=lambda x: float(x[0]))
         current_book['u'] = delta_data.get('u')
         current_book['seq'] = delta_data.get('seq')
 
