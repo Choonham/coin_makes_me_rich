@@ -307,6 +307,23 @@ class StateStore:
                 logger.error(f"Error in order history update loop: {e}", exc_info=True)
             await asyncio.sleep(interval_seconds)
 
+    async def add_or_update_position(self, position: Position):
+        """
+        특정 심볼의 포지션을 추가하거나 업데이트합니다.
+        """
+        async with self._lock:
+            # 기존 포지션이 있는지 확인하고 업데이트
+            for i, p in enumerate(self._system_state.active_positions):
+                if p.symbol == position.symbol:
+                    # 기존 포지션 정보를 새로운 정보로 갱신
+                    self._system_state.active_positions[i] = position
+                    logger.info(f"Position for {position.symbol} updated.")
+                    break
+            else:
+                # 기존 포지션이 없으면 새로 추가
+                self._system_state.active_positions.append(position)
+                logger.info(f"New position for {position.symbol} added.")
+        await self._update_state()
 
 # 전역 상태 저장소 인스턴스 생성
 state_store = StateStore()

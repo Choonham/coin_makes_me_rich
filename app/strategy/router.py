@@ -127,59 +127,87 @@ class StrategyRouter:
         logger.info("Position monitor loop started.")
         while True:
             try:
-                await asyncio.sleep(3) # TA 계산을 위해 약간의 여유를 둠
+                await asyncio.sleep(3)  # TA 계산을 위해 약간의 여유를 둠
                 active_positions = state_store.get_system_state().active_positions
+                logger.info(f"Checking for active positions. Found {len(active_positions)}.")
+
                 if not active_positions:
+                    logger.info("No active positions to monitor. Waiting...")
                     continue
 
                 config = self.risk_engine.get_config()
                 for position in active_positions:
+                    logger.info(f"Monitoring position for {position.symbol}. Entry price: {position.entry_price:.2f}")
+
                     # --- 1. 익절/손절/타임아웃 확인 (기존 로직) ---
                     orderbook = state_store.get_orderbook(position.symbol)
                     if not (orderbook and orderbook.get('b') and orderbook['b']):
+                        logger.warning(f"Skipping monitoring for {position.symbol}: No valid orderbook data found.")
                         continue
-                    
+
                     current_price = float(orderbook['b'][0][0])
                     entry_price = position.entry_price
-                    if entry_price == 0: continue
+                    if entry_price == 0:
+                        logger.warning(f"Skipping monitoring for {position.symbol}: Entry price is zero.")
+                        continue
 
                     pnl_bps = ((current_price / entry_price) - 1) * 10000
+                    logger.debug(f"[{position.symbol}] Current PnL: {pnl_bps:.1f} BPS.")
 
                     if pnl_bps >= config.default_tp_bps:
+                        logger.info(f"[{position.symbol}] Take Profit condition met. PnL: {pnl_bps:.1f} BPS.")
                         self._create_exit_signal(position, f"Take Profit at {pnl_bps:.1f} BPS")
-                        continue # 신호 생성 후 다음 포지션으로
+                        continue  # 신호 생성 후 다음 포지션으로
                     elif pnl_bps <= -config.default_sl_bps:
+                        logger.info(f"[{position.symbol}] Stop Loss condition met. PnL: {pnl_bps:.1f} BPS.")
                         self._create_exit_signal(position, f"Stop Loss at {pnl_bps:.1f} BPS")
                         continue
                     elif time.time() - position.entry_timestamp > config.max_holding_time_seconds:
-                        self._create_exit_signal(position, f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
+                        logger.info(
+                            f"[{position.symbol}] Timeout condition met. Held for {time.time() - position.entry_timestamp:.0f}s.")
+                        self._create_exit_signal(position,
+                                                 f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
                         continue
 
                     # --- 2. TA 기반 매도 조건 확인 (새로운 로직) ---
                     try:
                         kline_data = await self.bybit_client.get_kline(symbol=position.symbol, interval="1", limit=100)
-                        if not kline_data: continue
+                        if not kline_data:
+                            logger.warning(f"[{position.symbol}] Skipping TA check: No kline data.")
+                            continue
 
-                        df = calculate_indicators(kline_data, self.signal_generator.short_ma, self.signal_generator.long_ma)
-                        if df.empty or len(df) < 2: continue
+                        df = calculate_indicators(kline_data, self.signal_generator.short_ma,
+                                                  self.signal_generator.long_ma)
+                        if df.empty or len(df) < 2:
+                            logger.warning(f"[{position.symbol}] Skipping TA check: Insufficient data for indicators.")
+                            continue
 
                         latest = df.iloc[-1]
                         previous = df.iloc[-2]
+                        logger.debug(
+                            f"[{position.symbol}] TA data: latest RSI={latest['RSI']:.2f}, latest short_ma={latest[f'SMA_{self.signal_generator.short_ma}']:.2f}, latest long_ma={latest[f'SMA_{self.signal_generator.long_ma}']:.2f}")
 
                         # 매도 조건: RSI > 70 또는 데드 크로스
                         rsi_condition = latest['RSI'] > 70
-                        dead_cross_condition = (previous[f'SMA_{self.signal_generator.short_ma}'] >= previous[f'SMA_{self.signal_generator.long_ma}']) and \
-                                                 (latest[f'SMA_{self.signal_generator.short_ma}'] < latest[f'SMA_{self.signal_generator.long_ma}'])
+                        dead_cross_condition = (previous[f'SMA_{self.signal_generator.short_ma}'] >= previous[
+                            f'SMA_{self.signal_generator.long_ma}']) and \
+                                               (latest[f'SMA_{self.signal_generator.short_ma}'] < latest[
+                                                   f'SMA_{self.signal_generator.long_ma}'])
 
                         if rsi_condition:
+                            logger.info(f"[{position.symbol}] TA exit condition met: RSI > 70.")
                             self._create_exit_signal(position, f"RSI > 70 ({latest['RSI']:.1f})")
                         elif dead_cross_condition:
+                            logger.info(f"[{position.symbol}] TA exit condition met: Dead Cross detected.")
                             self._create_exit_signal(position, "Dead Cross detected")
+                        else:
+                            logger.debug(f"[{position.symbol}] No TA exit conditions met.")
+
 
                     except Exception as e:
-                        logger.error(f"Error checking TA exit conditions for {position.symbol}: {e}")
-
+                        logger.error(f"Error checking TA exit conditions for {position.symbol}: {e}", exc_info=True)
             except asyncio.CancelledError:
+                logger.info("Position monitor loop cancelled.")
                 break
             except Exception as e:
                 logger.error(f"Error in position monitor loop: {e}", exc_info=True)
@@ -187,8 +215,15 @@ class StrategyRouter:
     def _create_exit_signal(self, position: Position, reason: str):
         """모니터링에 의해 발견된 청산 신호를 중앙 큐에 넣습니다."""
         logger.info(f"[EXIT SIGNAL CREATED] Symbol: {position.symbol}, Reason: {reason}")
-        signal = Signal(symbol=position.symbol, side=Side.SELL, price=position.average_price, reason=reason,
-                        signal_type="exit_monitor")
+        signal = Signal(
+            symbol=position.symbol,
+            side=Side.SELL,
+            price=position.average_price,
+            reason=reason,
+            signal_type="scalping",
+            # 누락된 strength 필드를 추가합니다.
+            strength=1.0  # 1.0은 가장 강한 신호로 간주하여 즉시 매도를 유도합니다.
+        )
         self._signal_queue.put_nowait(signal)
 
     async def _evaluate_signal(self, signal: Signal):
@@ -280,34 +315,48 @@ class StrategyRouter:
                 logger.success(f"SPOT BUY order submitted for {signal.symbol}: {order_result}")
                 self._last_trade_times[signal.symbol] = datetime.utcnow()
 
-                # --- 주문 체결 내역을 조회하여 실제 진입 가격을 가져옵니다 ---
-                await asyncio.sleep(2.0)  # Bybit 서버가 주문을 처리하고 내역에 기록할 시간을 줍니다.
-                try:
-                    history = await self.bybit_client.get_order_history(symbol=signal.symbol, order_id=order_id,
-                                                                        limit=1)
-                    if history and history[0].get('avgPrice') and float(history[0]['avgPrice']) > 0:
-                        actual_entry_price = float(history[0]['avgPrice'])
-
-                        await state_store.add_trade(history[0])
-
-                        # 새로운 Position 객체를 생성하여 active_positions에 추가
-                        position = Position(
+                # --- [수정된 부분] 주문 체결 내역을 조회하여 실제 진입 가격을 가져옵니다. ---
+                max_retries = 10
+                for attempt in range(max_retries):
+                    await asyncio.sleep(1.0)  # 1초 간격으로 재시도
+                    try:
+                        history = await self.bybit_client.get_order_history(
                             symbol=signal.symbol,
-                            quantity=float(history[0]['cumExecQty']),
-                            average_price=actual_entry_price,
-                            entry_price=actual_entry_price,
-                            entry_timestamp=time.time(),
-                            highest_price_since_entry=actual_entry_price
+                            order_id=order_id,
+                            limit=1
                         )
-                        await state_store.add_or_update_position(position)
 
-                        logger.success(
-                            f"SUCCESS: New position for {signal.symbol} created with actual entry price: {actual_entry_price}")
-                    else:
-                        logger.error(f"Could not fetch valid avgPrice for order {order_id}. History: {history}")
+                        # 내역이 존재하고 상태가 'Filled'일 때만 처리
+                        if history and history[0].get('orderStatus') == 'Filled':
+                            avg_price = float(history[0].get('avgPrice', 0))
+                            if avg_price > 0:
+                                await state_store.add_trade(history[0])
 
-                except Exception as e:
-                    logger.error(f"Failed to fetch and record trade for order {order_id}: {e}", exc_info=True)
+                                position = Position(
+                                    symbol=signal.symbol,
+                                    quantity=float(history[0]['cumExecQty']),
+                                    average_price=avg_price,
+                                    entry_price=avg_price,
+                                    entry_timestamp=time.time(),
+                                    highest_price_since_entry=avg_price
+                                )
+                                await state_store.add_or_update_position(position)
+                                logger.success(
+                                    f"SUCCESS: New position for {signal.symbol} created with actual entry price: {avg_price}")
+                                break  # 성공적으로 처리했으므로 루프를 종료합니다.
+
+                        # 10회 재시도 후에도 실패하면 에러 로그를 남깁니다.
+                        if attempt == max_retries - 1:
+                            logger.error(
+                                f"Failed to fetch valid filled trade history for order {order_id} after {max_retries} attempts. Final history: {history}")
+
+                    except Exception as e:
+                        logger.error(
+                            f"Attempt {attempt + 1}/{max_retries} failed to fetch and record trade for order {order_id}: {e}",
+                            exc_info=True)
+                        if attempt == max_retries - 1:
+                            # 마지막 시도에서 발생한 예외는 다시 발생시킵니다.
+                            raise
 
                 asyncio.create_task(self._unlock_after_delay(5))
 

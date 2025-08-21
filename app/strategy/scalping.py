@@ -95,7 +95,7 @@ class SignalGenerator:
             logger.info(f"[{symbol}] Checking signals | RSI: {latest['RSI']:.2f} | SMA({self.short_ma}): {latest[f'SMA_{self.short_ma}']:.2f} | SMA({self.long_ma}): {latest[f'SMA_{self.long_ma}']:.2f}")
 
             # 매수 조건 확인
-            rsi_condition = latest['RSI'] < 40
+            rsi_condition = latest['RSI'] < 50
             golden_cross_condition = (previous[f'SMA_{self.short_ma}'] <= previous[f'SMA_{self.long_ma}']) and \
                                      (latest[f'SMA_{self.short_ma}'] > latest[f'SMA_{self.long_ma}'])
 
