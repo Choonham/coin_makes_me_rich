@@ -157,7 +157,7 @@ class StrategyRouter:
 
                     # --- 2. TA 기반 매도 조건 확인 (새로운 로직) ---
                     try:
-                        kline_data = await self.bybit_client.get_kline(symbol=position.symbol, interval="60", limit=100)
+                        kline_data = await self.bybit_client.get_kline(symbol=position.symbol, interval="1", limit=100)
                         if not kline_data: continue
 
                         df = calculate_indicators(kline_data, self.signal_generator.short_ma, self.signal_generator.long_ma)
@@ -254,32 +254,63 @@ class StrategyRouter:
             return True
         return False
 
+        # app/strategy/router.py
+
     async def _execute_buy_trade(self, signal: Signal):
-        """현물 매수 주문을 실행하고 거래 잠금을 설정합니다."""
+        """현물 매수 주문을 실행하고, 체결 완료 후 정확한 진입 가격을 기록합니다."""
         try:
             notional_size = self.risk_engine.calculate_notional_size(signal.symbol)
-            if notional_size <= 0: return
+            if notional_size <= 0:
+                return
 
             self._trade_in_progress = True
             self._pending_symbol = signal.symbol
-            logger.critical(f"LOCKING TRADES: Submitting BUY order for {signal.symbol}.")
+            logger.critical(
+                f"LOCKING TRADES: Submitting BUY order for {signal.symbol} with notional {notional_size}.")
 
-            order_result = await self.bybit_client.place_market_order(symbol=signal.symbol, side=Side.BUY, qty=0,
-                                                                      notional=notional_size)
+            order_result = await self.bybit_client.place_market_order(
+                symbol=signal.symbol,
+                side=Side.BUY,
+                qty=0,
+                notional=notional_size
+            )
 
             if order_result and order_result.get('orderId'):
+                order_id = order_result['orderId']
                 logger.success(f"SPOT BUY order submitted for {signal.symbol}: {order_result}")
                 self._last_trade_times[signal.symbol] = datetime.utcnow()
 
-                await asyncio.sleep(1.5)
-                position = state_store.get_position(signal.symbol)
-                if position:
-                    position.entry_price = position.average_price
-                    position.entry_timestamp = time.time()
-                    position.highest_price_since_entry = position.average_price
+                # --- 주문 체결 내역을 조회하여 실제 진입 가격을 가져옵니다 ---
+                await asyncio.sleep(2.0)  # Bybit 서버가 주문을 처리하고 내역에 기록할 시간을 줍니다.
+                try:
+                    history = await self.bybit_client.get_order_history(symbol=signal.symbol, order_id=order_id,
+                                                                        limit=1)
+                    if history and history[0].get('avgPrice') and float(history[0]['avgPrice']) > 0:
+                        actual_entry_price = float(history[0]['avgPrice'])
 
-                asyncio.create_task(self._fetch_and_record_trade(signal.symbol, order_result['orderId']))
+                        await state_store.add_trade(history[0])
+
+                        # 새로운 Position 객체를 생성하여 active_positions에 추가
+                        position = Position(
+                            symbol=signal.symbol,
+                            quantity=float(history[0]['execQty']),
+                            average_price=actual_entry_price,
+                            entry_price=actual_entry_price,
+                            entry_timestamp=time.time(),
+                            highest_price_since_entry=actual_entry_price
+                        )
+                        await state_store.add_or_update_position(position)
+
+                        logger.success(
+                            f"SUCCESS: New position for {signal.symbol} created with actual entry price: {actual_entry_price}")
+                    else:
+                        logger.error(f"Could not fetch valid avgPrice for order {order_id}. History: {history}")
+
+                except Exception as e:
+                    logger.error(f"Failed to fetch and record trade for order {order_id}: {e}", exc_info=True)
+
                 asyncio.create_task(self._unlock_after_delay(5))
+
             else:
                 logger.error(f"SPOT BUY order submission failed for {signal.symbol}. Result: {order_result}")
                 await self._unlock_trade()

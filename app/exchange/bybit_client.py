@@ -151,12 +151,17 @@ class BybitClient:
         data = await self._request("GET", "/v5/market/instruments-info", params=params)
         return data.get("result", {}).get("list", [])
 
-    async def get_wallet_balance(self, account_type: str = "UNIFIED") -> Dict:
-        """계좌 잔고 정보를 가져옵니다."""
-        params = {"accountType": "UNIFIED"} # Explicitly set to UNIFIED
-        data = await self._request("GET", "/v5/account/wallet-balance", params=params)
-        balance_data = data.get("result", {}).get("list", [{}])[0]
-        return balance_data
+    async def get_wallet_balance(self, **params):
+        """
+        Bybit API v5의 지갑 잔고 엔드포인트를 호출하여 전체 응답을 반환합니다.
+        """
+        # 이 함수는 API의 응답 딕셔너리 전체를 그대로 반환해야 합니다.
+        return await self._request(
+            endpoint="/v5/account/wallet-balance",
+            method="GET",
+            params=params,
+            auth=True
+        )
 
     async def get_closed_pnl(self, category: str = "spot", limit: int = 50) -> List[Dict]:
         """Closed PnL 기록을 가져옵니다."""

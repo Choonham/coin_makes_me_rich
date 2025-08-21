@@ -79,7 +79,7 @@ class SignalGenerator:
         """
         try:
             # 1시간봉 기준 캔들 데이터 가져오기
-            kline_data = await self.bybit_client.get_kline(symbol=symbol, interval="60", limit=100)
+            kline_data = await self.bybit_client.get_kline(symbol=symbol, interval="1", limit=100)
             if not kline_data or len(kline_data) < self.long_ma:
                 return None
 
@@ -92,8 +92,10 @@ class SignalGenerator:
             latest = df.iloc[-1]
             previous = df.iloc[-2]
 
+            logger.info(f"[{symbol}] Checking signals | RSI: {latest['RSI']:.2f} | SMA({self.short_ma}): {latest[f'SMA_{self.short_ma}']:.2f} | SMA({self.long_ma}): {latest[f'SMA_{self.long_ma}']:.2f}")
+
             # 매수 조건 확인
-            rsi_condition = latest['RSI'] < 30
+            rsi_condition = latest['RSI'] < 40
             golden_cross_condition = (previous[f'SMA_{self.short_ma}'] <= previous[f'SMA_{self.long_ma}']) and \
                                      (latest[f'SMA_{self.short_ma}'] > latest[f'SMA_{self.long_ma}'])
 

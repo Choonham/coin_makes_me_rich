@@ -44,7 +44,7 @@ class RiskEngine:
                 symbol = item['symbol']
                 if symbol in initial_universe:
                     # 유동성 체크 로직 (기존 코드 유지)
-                    kline_data = await self.bybit_client.get_kline(symbol=symbol, interval="60", limit=15)
+                    kline_data = await self.bybit_client.get_kline(symbol=symbol, interval="1", limit=15)
                     if not kline_data or len(kline_data) < 15:
                         continue
 
