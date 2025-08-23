@@ -162,12 +162,12 @@ class StrategyRouter:
                         logger.info(f"[{position.symbol}] Stop Loss condition met. PnL: {pnl_bps:.1f} BPS.")
                         self._create_exit_signal(position, f"Stop Loss at {pnl_bps:.1f} BPS")
                         continue
-                    elif time.time() - position.entry_timestamp > config.max_holding_time_seconds:
-                        logger.info(
-                            f"[{position.symbol}] Timeout condition met. Held for {time.time() - position.entry_timestamp:.0f}s.")
-                        self._create_exit_signal(position,
-                                                 f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
-                        continue
+                    # elif time.time() - position.entry_timestamp > config.max_holding_time_seconds:
+                    #     logger.info(
+                    #         f"[{position.symbol}] Timeout condition met. Held for {time.time() - position.entry_timestamp:.0f}s.")
+                    #     self._create_exit_signal(position,
+                    #                              f"Timeout after {time.time() - position.entry_timestamp:.0f}s")
+                    #     continue
 
                     # --- 2. TA 기반 매도 조건 확인 (새로운 로직) ---
                     try:
@@ -370,6 +370,7 @@ class StrategyRouter:
 
     async def _execute_sell_trade(self, signal: Signal, qty_to_sell: float):
         """보유한 현물 자산 전체를 매도하는 주문을 실행합니다."""
+        global realized_pnl
         try:
             self._trade_in_progress = True
             self._pending_symbol = signal.symbol
@@ -379,10 +380,52 @@ class StrategyRouter:
                                                                       qty=qty_to_sell, notional=0)
 
             if order_result and order_result.get('orderId'):
+                order_id = order_result['orderId']
                 logger.success(f"SPOT SELL order submitted for {signal.symbol}: {order_result}")
                 self._last_trade_times[signal.symbol] = datetime.utcnow()
-                asyncio.create_task(self._fetch_and_record_trade(signal.symbol, order_result['orderId']))
+
+                # --- [수정된 부분] 체결 내역을 조회하여 실현 손익을 기록합니다 ---
+                max_retries = 10
+                for attempt in range(max_retries):
+                    await asyncio.sleep(1.0)
+                    try:
+                        history = await self.bybit_client.get_order_history(symbol=signal.symbol, order_id=order_id,
+                                                                            limit=1)
+                        if history and history[0].get('orderStatus') == 'Filled':
+                            trade_data = history[0]
+                            await state_store.add_trade(trade_data)
+
+                            # 포지션 정보 가져오기 (매수 시점에 저장한 포지션)
+                            position = state_store.get_position(signal.symbol)
+                            if position:
+                                # PnL 계산 및 업데이트
+                                entry_price = position.entry_price
+                                exit_price = float(trade_data.get('avgPrice', '0'))
+                                if exit_price > 0:
+                                    # 수익 계산: (매도 가격 - 매수 가격) * 수량
+                                    realized_pnl = (exit_price - entry_price) * float(trade_data.get('cumExecQty', '0'))
+                                    await state_store.update_realized_pnl(realized_pnl)
+
+                                # 포지션 삭제
+                                await state_store.remove_position(signal.symbol)
+
+                            logger.success(
+                                f"Successfully closed position for {signal.symbol}. Realized PnL: {realized_pnl:.2f}")
+                            break  # 성공적으로 처리했으므로 루프를 종료합니다.
+
+                        if attempt == max_retries - 1:
+                            logger.error(
+                                f"Failed to fetch valid filled trade history for order {order_id} after {max_retries} attempts.")
+
+                    except Exception as e:
+                        logger.error(
+                            f"Attempt {attempt + 1}/{max_retries} failed to fetch and record sell trade for order {order_id}: {e}",
+                            exc_info=True)
+                        if attempt == max_retries - 1:
+                            raise
+
                 asyncio.create_task(self._unlock_after_delay(5))
+
             else:
                 logger.error(f"SPOT SELL order submission failed for {signal.symbol}. Result: {order_result}")
                 await self._unlock_trade()

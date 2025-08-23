@@ -99,21 +99,20 @@ class RiskEngine:
 
     def is_globally_ok_to_trade(self) -> bool:
         """시스템 전체의 거래 가능 여부를 확인합니다 (손실 한도, 수익 목표 등)."""
-        system_state = state_store.get_system_state()
-        pnl_day = system_state.pnl_day
-        total_equity = system_state.total_equity
-
-        if pnl_day <= -self.config.day_loss_limit_usd:
-            if system_state.status == "running":
-                logger.critical(f"DAILY LOSS LIMIT REACHED! PnL: ${pnl_day:.2f}. Halting trades.")
-            return False
-
-        if total_equity > 0:
-            profit_target_usd = total_equity * (self.config.day_profit_target_pct / 100)
-            if pnl_day >= profit_target_usd:
-                if system_state.status == "running":
-                    logger.success(f"DAILY PROFIT TARGET REACHED! PnL: ${pnl_day:.2f}. Halting trades.")
-                return False
+        # system_state = state_store.get_system_state()
+        # pnl_day = system_state.pnl_day
+        # total_equity = system_state.total_equity
+        # config = self.get_config()
+        # state = state_store.get_system_state()
+        #
+        # if state.realized_pnl <= -self.config.day_loss_limit_usd:
+        #     if system_state.status == "running":
+        #         logger.critical(f"DAILY LOSS LIMIT REACHED! PnL: ${pnl_day:.2f}. Halting trades.")
+        #     return False
+        #
+        # if state.realized_pnl >= total_equity * (self.config.day_profit_target_pct / 100):
+        #     logger.success(f"DAILY PROFIT TARGET REACHED! PnL: ${state.realized_pnl:.2f}. Halting trades.")
+        #     return False
 
         return True
 

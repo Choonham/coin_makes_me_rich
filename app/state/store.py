@@ -325,5 +325,14 @@ class StateStore:
                 logger.info(f"New position for {position.symbol} added.")
         await self._update_state()
 
+    async def update_realized_pnl(self, pnl: float):
+        """
+        [신규 추가] 실현 손익을 업데이트합니다.
+        """
+        async with self._lock:
+            self._system_state.realized_pnl += pnl
+            logger.critical(f"Realized PnL updated. Current total: {self._system_state.realized_pnl:.2f}")
+        await self._update_state()
+
 # 전역 상태 저장소 인스턴스 생성
 state_store = StateStore()

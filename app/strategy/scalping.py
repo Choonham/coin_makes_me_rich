@@ -11,7 +11,8 @@
 #
 #
 import asyncio
-from typing import Optional
+import time
+from typing import Optional, Dict
 
 from loguru import logger
 
@@ -31,6 +32,8 @@ class SignalGenerator:
         self.bybit_client = bybit_client
         self.short_ma = 5
         self.long_ma = 20
+        self._last_signal_sent: Dict[str, float] = {}  # [수정] 마지막 신호 전송 시간을 저장하는 딕셔너리 추가
+        self._cooldown_seconds = 60 # [수정] 쿨다운 시간 설정 (예: 60초)
         logger.info("Technical Analysis SignalGenerator initialized.")
 
     async def run_loop(self, interval_seconds: float = 5.0):
@@ -59,18 +62,23 @@ class SignalGenerator:
                 logger.error(f"Critical error in TA signal loop: {e}", exc_info=True)
                 await asyncio.sleep(15)
 
-
-
     async def check_and_send_signal(self, symbol: str):
         """
         특정 심볼에 대한 매수 신호 조건을 확인하고, 충족 시 신호를 큐로 보냅니다.
         """
+        # [수정] 쿨다운 체크 추가: 마지막 신호를 보낸 후 충분한 시간이 지났는지 확인
+        last_sent_time = self._last_signal_sent.get(symbol, 0)
+        if time.time() - last_sent_time < self._cooldown_seconds:
+            logger.debug(f"[{symbol}] Skipping signal generation. In cooldown period.")
+            return
+
         if state_store.get_position(symbol):
             return
 
         buy_signal = await self._check_for_buy_signal(symbol)
         if buy_signal:
             self.signal_queue.put_nowait(buy_signal)
+            self._last_signal_sent[symbol] = time.time()  # [수정] 신호 전송 시간 기록
 
     async def _check_for_buy_signal(self, symbol: str) -> Optional[Signal]:
         """
@@ -95,7 +103,7 @@ class SignalGenerator:
             logger.info(f"[{symbol}] Checking signals | RSI: {latest['RSI']:.2f} | SMA({self.short_ma}): {latest[f'SMA_{self.short_ma}']:.2f} | SMA({self.long_ma}): {latest[f'SMA_{self.long_ma}']:.2f}")
 
             # 매수 조건 확인
-            rsi_condition = latest['RSI'] < 50
+            rsi_condition = latest['RSI'] < 30
             golden_cross_condition = (previous[f'SMA_{self.short_ma}'] <= previous[f'SMA_{self.long_ma}']) and \
                                      (latest[f'SMA_{self.short_ma}'] > latest[f'SMA_{self.long_ma}'])
 
