@@ -51,9 +51,9 @@ class RiskEngine:
                     total_volume = sum(float(k[5]) for k in kline_data)
                     prices = [float(k[4]) for k in kline_data]
 
-                    if total_volume == 0 or all(p == prices[0] for p in prices):
-                        logger.warning(f"[{symbol}] Illiquid symbol detected. Skipping.")
-                        continue
+                    # if total_volume == 0 or all(p == prices[0] for p in prices):
+                    #     logger.warning(f"[{symbol}] Illiquid symbol detected. Skipping.")
+                    #     continue
 
                     liquid_symbols.append(symbol)
                     self.instrument_info[symbol] = item.get('lotSizeFilter', {})

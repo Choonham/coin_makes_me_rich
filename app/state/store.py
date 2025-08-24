@@ -149,10 +149,11 @@ class StateStore:
                     self._system_state.pnl_day_pct = (
                                                                  pnl / self._initial_total_equity) * 100 if self._initial_total_equity > 0 else 0.0
 
-                # --- 현재 보유 코인 목록 업데이트 (v5 호환) ---
-                self._balances.clear()
-                held_symbols_set = set()
+                # --- [수정된 부분] held_symbols를 active_positions를 기반으로 업데이트합니다. ---
+                held_symbols_set = {p.symbol for p in self._system_state.active_positions}
+                self._system_state.held_symbols = sorted(list(held_symbols_set))
 
+                self._balances.clear()
                 for coin_dict in coin_list:
                     # 'walletBalance' 키를 'equity'로 변경하여 CoinBalance 모델에 전달
                     # **중요**: CoinBalance 모델의 필드명도 'walletBalance'에서 'equity'로 변경해야 합니다.
@@ -163,12 +164,6 @@ class StateStore:
 
                     balance = CoinBalance(**coin_dict_compatible)
                     self._balances[balance.coin] = balance
-
-                    if balance.coin != "USDT" and float(balance.wallet_balance or 0) > 1e-9:
-                        symbol = f"{balance.coin}USDT"
-                        held_symbols_set.add(symbol)
-
-                self._system_state.held_symbols = sorted(list(held_symbols_set))
 
             logger.info(
                 f"Wallet balance updated. Equity: {self._system_state.total_equity:.2f}, "
